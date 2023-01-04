@@ -4,7 +4,7 @@
 
 
 # Project & Portfolio
-### First & Last Name 
+### Nicholas Cruz
 
 
 ![Degree Program](https://img.shields.io/badge/degree-web%20development-blue.svg)&nbsp; 
