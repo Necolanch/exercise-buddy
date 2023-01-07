@@ -28,7 +28,14 @@ Each week I will summarize my milestone activity and progress by writing a stand
 
 ### Week 1
 
-Replace this paragraph with your stand up for this week. Use the prompts above to summarize your most recent milestone activity and work.
+⚙️ Overview - This week I set up my repo for my project and researched/proposed an idea for my final project.
+<br>
+🌵 Challenges - I ran into problems of finding acceptable APIs for the several project ideas I had but finally found one by researching and thinking through project ideas and if it would
+align with my desired tech stack.
+<br>
+🏆 Accomplishments - I got more of an expectation of what it would be like to work as an entry level web developer. I also got a little more of an understanding of Associations in Sequelize for working with SQL databases.
+<br>
+🔮 Next Steps - Next I plan to start thinking through the design and how I will get the API data I am using to show on the frontend and store in the database the selections from the user.
 
 ### Week 2
 
