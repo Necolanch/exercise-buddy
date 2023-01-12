@@ -1,4 +1,3 @@
-
 # Portfolio 
 
 Use this folder to begin to curate past projects, code snippets, research, and other content in development that you may like to use for your own Portfolio. 
@@ -11,6 +10,12 @@ This can include...
 * Adding inline code comments
 * Adding, fixing, or continuing to work on features
 * Organizing work into sub folders
+
+Project & Portfolio 3/Music Search - https://github.com/CruzNicholas-FS/WDV339-Project
+* I would like to add comments to this project to better understand it
+Project & Portfolio 2/Splitgate Data Portal (formerly Halo Fakepoint) - https://github.com/Necolanch/SplitgateDataPortal
+* I am enhancing this by adding Signup/Login/User Authorization via JWT
+Product Feedback Application - https://github.com/Necolanch/product-feedback
 
 <br>
 
