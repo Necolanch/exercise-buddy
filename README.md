@@ -6,30 +6,6 @@ This repository will be used for upcoming Project & Portfolio activity. We will 
 <br>
 
 ## Step 1
-
-Clone down a local copy of this repository.
-
-
-
-## Step 2
-
-Review the README files and update any 'First & Last Name' text shown, to your own first and last name. 
-
-
-
-## Step 3
-
-Attend the first Live Session. If you are unable to attend, be sure to watch the meeting archive video when posted.  
-
-<br>
-
-
-### Next Steps... 
-After completing the above steps, delete all of the above text including this paragraph. As you make updates to your work each week, use the log provided to keep a record of your activity (see link below). 
-
-
-<br>
-
 # Project & Portfolio IV
 ### Nicholas Cruz
 
