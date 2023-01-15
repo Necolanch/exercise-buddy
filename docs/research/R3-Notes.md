@@ -1,6 +1,6 @@
 # Project & Portfolio 
 
-* **Research Notes - Milestone 3**
+* **Research Notes - Milestone 2**
 * **Nicholas Cruz**
 * **01/17/2023**
 
@@ -12,30 +12,30 @@ This document contains general notes related to Style & Brand
 
 <br>
 
-## Wireframe benefits
+## Style Tiles
 Brief overview of research. 
 
-* It is a simple process that lays out the architecture of the product, similar to a blueprint. It explores user experience and how the displayed content should be handled.
-* The process allows the development and design teams to get on the same page early on.
-* Delivery time of the product is faster because it reduces the risk of having to make time-consuming graphical changes, or even code changes later in the process.
+* Style tiles are great to establish some sort of visual language between stakeholders/clients and designers, without the full effort of creating three mockups to present.
+* They do not imply specific dimensions or devices, only the fact it will be digital in some form.
+* This process also allows all parties to explore potentially unfamiliar territory.
 
 <br>
 
-## Wireframe DONT'S
+## Color Scheme
 Brief overview of research. 
 
-* Do not go into too much detail. Start with the basics of what pieces on what pages perform what action.
-* Do not emphasize color and design. Working with black and white imagery helps to focus on the process which is to finalize the layout of content.
-* Do not wireframe every single page. Doing so can become overwhelming, add unnecessary work to a project timeline and even cause confusion.
+* Before choosing a color scheme, make sure to understand if you are working with an already established brand or not. You may need to choose some secondary colors to accent on the website.
+* When choosing a web design color scheme, you may need to utilize color theory in making your selection.
+* Keep in mind color psychology, the perception of colors, of other cultures that may come in contact with your website to make sure no offense is passed.
 
 <br>
 
-## Logistics
+## Brand Personality
 Brief overview of research. 
 
-* Understand what you are building and what problem(s) it will solve. Research competition to make sure you are not creating a duplicate.
-* Target market. Research who is using your competitor's products and what group(s) do the majority of them fit into.
-* Define how you want the app to be used. Eliminate as much possibility for misconduct to be done by users with malicious intentions.
+* Brand personality is how you would describe a brand if it were a person. This is done through images, advertisements, and the products the brand creates.
+* Brands create their personality by determining their values, desired audience personality, and ask questions about your brand as if it were a human.
+* The 5 pillars of brand personality are sincerity, excitement, competence, sophistication, and ruggedness, with related traits that fall into each pillar.
 
     
 <br>
@@ -43,16 +43,16 @@ Brief overview of research.
 ## Reference Links
 Use this section to highlight your own independent research. Replace the example references below with your own links and recommended resources. For example...
 
-**Resource 1: Good users — bad users: from use cases to misuse cases**  
-[Good users — bad users: from use cases to misuse cases](https://uxdesign.cc/good-users-bad-users-from-use-cases-to-misuse-cases-cd4cc0424e3a): I learned about thought process for creating an app.
+**Resource 1: What is a Brand Personality, According to Marketers Who've Developed Them**  
+[What is a Brand Personality, According to Marketers Who've Developed Them](https://blog.hubspot.com/marketing/what-is-brand-personality): I learned about brand personality.
 
-**Resource 2: The importance and benefits of wireframing when designing a website**    
-[The importance and benefits of wireframing when designing a website](https://www.zebedeecreations.com/blog/the-importance-of-wireframing/): I found some specific benefits of wireframing.
+**Resource 2: An overview of Style Tiles and why you should start implementing them in your design process**    
+[An overview of Style Tiles and why you should start implementing them in your design process](https://uxdesign.cc/an-overview-of-style-tiles-and-why-you-should-start-implementing-them-in-the-design-process-37163bffb5b9): I learned why style tiles are important.
 
-**Resource 3: The Importance of Wireframing for a Responsive Website**    
-[The Importance of Wireframing for a Responsive Website](https://www.seguetech.com/the-importance-of-wireframing-for-a-responsive-website/): I found things to avoid when wireframing.
+**Resource 3: Website color schemes: Theory, practice, and inspiration**    
+[Website color schemes: Theory, practice, and inspiration](https://getflywheel.com/layout/website-color-schemes/): I learned about properly implementing color scheme.
 
 <br>
 
 **Note:**  
-Resource 1 really helped me to see why it is important to research and think out all potential issues before even getting to wireframing.
+Resource 2 opened up a whole new way of thinking for me about branding.
