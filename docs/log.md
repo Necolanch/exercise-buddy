@@ -39,7 +39,13 @@ align with my desired tech stack.
 
 ### Week 2
 
-My next stand up will go here...
+⚙️ Overview - This week I created my wireframe and style tile for my propose project. I also researched and learned more about why wireframes help and the importance of style tiles.
+<br>
+🌵 Challenges - I ran into problems of getting my link to my wireframe in Penpot to be accessible so from now on I will only use Figma.
+<br>
+🏆 Accomplishments - I created a low fidelity wireframe. I started figuring out how my data will be structured in the database.
+<br>
+🔮 Next Steps - Next I plan to start making my prototype and making a more flushed out plan to tackle issues in development.
 
 ### Week 3
 
