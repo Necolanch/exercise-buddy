@@ -63,3 +63,5 @@ The key feature will be that a user can create a one week exercise plan. This is
 *Use of an API is expected. This can be 3rd party APIs, your own API, or a combination of data sets. Identify which integrations are planned for and outline how you will use them transformatively. For 3rd party APIs provide links to their respective documentation and verify that your intended use complies with their Terms of Service.*
 
 I will use the following Exercises API to obtain the exercises for users to choose from: https://api-ninjas.com/api/exercises
+
+[Link to style tile](https://www.figma.com/file/RgnVmE6oBdzBv7jTjqooRO/Untitled?node-id=1%3A2&t=VGJUBJNoFzs9xOMp-1)
