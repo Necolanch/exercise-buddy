@@ -49,7 +49,13 @@ align with my desired tech stack.
 
 ### Week 3
 
-Stay tuned, this stand up is coming soon...
+⚙️ Overview - This week I created my prototype and planned elements of my project.
+<br>
+🌵 Challenges - I ran into problems of keeping my protype exact to my wireframe. There are a few changes but they are for better user experience.
+<br>
+🏆 Accomplishments - I created a mostly fluid click-through prototype of my application.
+<br>
+🔮 Next Steps - Next I plan to start thinking through the logic that is needed to achieve the core features and use cases.
 
 ### Week 4
 
