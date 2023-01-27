@@ -1,5 +1,10 @@
+import { useState } from 'react';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
@@ -30,16 +35,23 @@ const NumberInput = (props) => {
 }
 
 const DropDown = (props) => {
+    const [day,setDay]=useState("");
+    const handleChange = (event) => {
+        setDay(event.target.value);
+      };
     return(
-        <select>
-          <option>Sunday</option>
-          <option>Monday</option>
-          <option>Tuesday</option>
-          <option>Wednesday</option>
-          <option>Thursday</option>
-          <option>Friday</option>
-          <option>Saturday</option>
-        </select>
+        <Box>
+        <InputLabel id="demo-simple-select-label" sx={{color:"#FAFAFF"}}>Day</InputLabel>
+        <Select labelId="demo-simple-select-label" id="demo-simple-select" value={day} label="Day" sx={{width:"10vw", backgroundColor:"#FAFAFF"}} onChange={handleChange}>
+          <MenuItem value="Sunday">Sunday</MenuItem>
+          <MenuItem value="Monday">Monday</MenuItem>
+          <MenuItem value="Tuesday">Tuesday</MenuItem>
+          <MenuItem value="Wednesday">Wednesday</MenuItem>
+          <MenuItem value="Thursday">Thursday</MenuItem>
+          <MenuItem value="Friday">Friday</MenuItem>
+          <MenuItem value="Saturday">Saturday</MenuItem>
+        </Select>
+        </Box>
     )
 }
 
