@@ -5,6 +5,7 @@ import { AddList, PlanList } from './Components/List';
 import HamburgerMenu from './Components/HamburgerMenu';
 import { SearchInput, NumberInput, DropDown } from './Components/Input';
 import Filter from './Components/Filter';
+import Description from './Components/Description';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <NumberInput/>
       <DropDown/>
       <Filter/>
+      <Description/>
     </div>
   );
 }
