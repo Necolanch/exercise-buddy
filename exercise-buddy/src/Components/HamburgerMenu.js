@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -25,6 +26,7 @@ const HamburgerMenu = (props) => {
         }
         setOpen(state);
       };
+    const navigate=useNavigate();
     return (
         <Box sx={{flexGrow:1}}>
           <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)", padding:"1em"}}>
@@ -42,35 +44,35 @@ const HamburgerMenu = (props) => {
                   <CloseIcon />
                 </IconButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={()=>navigate("/home")}>
                     <ListItemIcon>
                         <HomeIcon/>
                     </ListItemIcon>
                       <ListItemText primary="Home" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={()=>navigate("/search")}>
                     <ListItemIcon>
                         <SearchIcon/>
                     </ListItemIcon>
                       <ListItemText primary="Search" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={()=>navigate("/plan")}>
                     <ListItemIcon>
                         <ContentPasteIcon/>
                     </ListItemIcon>
                       <ListItemText primary="Plan" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={()=>navigate("/favorites")}>
                     <ListItemIcon>
                         <FavoriteIcon/>
                     </ListItemIcon>
                       <ListItemText primary="Favorites" />
                 </ListItemButton>
 
-                <ListItemButton>
+                <ListItemButton onClick={()=>navigate("/settings")}>
                     <ListItemIcon>
                         <SettingsIcon/>
                     </ListItemIcon>
