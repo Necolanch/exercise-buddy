@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -11,6 +10,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 import { Divider, Typography } from '@mui/material';
+
+import { useNavigate } from 'react-router-dom';
 
 const theme=createTheme({
     components:{
@@ -25,6 +26,7 @@ const theme=createTheme({
 })
 
 const AddList = (props) =>{
+  const navigate=useNavigate();
     return (
         <ThemeProvider theme={theme}>
         <List>
@@ -34,9 +36,9 @@ const AddList = (props) =>{
                     <IconButton edge="end" aria-label="delete">
                       <AddIcon/>
                     </IconButton>}>
-              <ListItemIcon>
+              <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
             </ListItem>
             </Grid>
@@ -46,9 +48,9 @@ const AddList = (props) =>{
                     <IconButton edge="end" aria-label="delete">
                       <AddIcon/>
                     </IconButton>}>
-              <ListItemIcon>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
             </ListItem>
             </Grid>
@@ -58,9 +60,9 @@ const AddList = (props) =>{
                     <IconButton edge="end" aria-label="delete">
                       <AddIcon/>
                     </IconButton>}>
-              <ListItemIcon>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
             </ListItem>
             </Grid>
@@ -70,9 +72,9 @@ const AddList = (props) =>{
                     <IconButton edge="end" aria-label="delete">
                       <AddIcon/>
                     </IconButton>}>
-              <ListItemIcon>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
             </ListItem>
             </Grid>
@@ -83,6 +85,7 @@ const AddList = (props) =>{
 }
 
 const PlanList = (props) =>{
+  const navigate=useNavigate();
     return (
         <ThemeProvider theme={theme}>
         <List>
@@ -95,9 +98,9 @@ const PlanList = (props) =>{
             </IconButton>
             </div>
             <ListItem>
-              <ListItemIcon>
+            <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
             </Grid>
@@ -110,9 +113,9 @@ const PlanList = (props) =>{
             </IconButton>
             </div>
             <ListItem>
-              <ListItemIcon>
+            <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
             </Grid>
@@ -125,9 +128,9 @@ const PlanList = (props) =>{
             </IconButton>
             </div>
             <ListItem>
-              <ListItemIcon>
+            <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
             </Grid>
@@ -140,9 +143,9 @@ const PlanList = (props) =>{
             </IconButton>
             </div>
             <ListItem>
-              <ListItemIcon>
+            <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
-              </ListItemIcon>
+              </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
             </Grid>
@@ -153,6 +156,7 @@ const PlanList = (props) =>{
 }
 
 const DashboardList = (props) => {
+  const navigate=useNavigate();
   return (
     <Box sx={{marginTop:"5em", marginLeft:"2em"}}>
     <Typography variant="h6" component="h4" sx={{color:"white", width:"50vw", textAlign:"center", marginBottom:"1em"}}>Current Week Overview</Typography>
@@ -162,9 +166,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -180,9 +184,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -198,9 +202,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -216,9 +220,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -234,9 +238,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -252,9 +256,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
@@ -270,9 +274,9 @@ const DashboardList = (props) => {
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
           <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
             <Typography>{props.day}</Typography>
-            <IconButton>
-              <VisibilityIcon/>
-            </IconButton>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
