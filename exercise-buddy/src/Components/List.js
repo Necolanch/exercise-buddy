@@ -89,65 +89,335 @@ const PlanList = (props) =>{
     return (
         <ThemeProvider theme={theme}>
         <List>
-        <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
-        <Grid item xs={5}>
-            <div style={{display:"flex"}}>
+        <Grid container spacing={2} rowSpacing={2} sx={{width:"100vw"}}>
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
             <h3>{props.day}</h3>
             <IconButton aria-label="edit">
               <EditIcon/>
             </IconButton>
-            </div>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+              
+            <Box sx={{width:"20vw"}}>
             <ListItem>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
             </Grid>
 
-            <Grid item xs={5}>
-            <div style={{display:"flex"}}>
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
             <h3>{props.day}</h3>
             <IconButton aria-label="edit">
               <EditIcon/>
             </IconButton>
-            </div>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
             <ListItem>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
             </Grid>
 
-            <Grid item xs={5}>
-            <div style={{display:"flex"}}>
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
             <h3>{props.day}</h3>
             <IconButton aria-label="edit">
               <EditIcon/>
             </IconButton>
-            </div>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
             <ListItem>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
             </Grid>
 
-            <Grid item xs={5}>
-            <div style={{display:"flex"}}>
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
             <h3>{props.day}</h3>
             <IconButton aria-label="edit">
               <EditIcon/>
             </IconButton>
-            </div>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
             <ListItem>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
               <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
             </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
+            <h3>{props.day}</h3>
+            <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
+            <h3>{props.day}</h3>
+            <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+            <Box style={{display:"flex"}}>
+            <h3>{props.day}</h3>
+            <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </Box>
+            
+            <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+
+            <Box sx={{width:"20vw"}}>
+            <ListItem>
+            <IconButton onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+            </ListItem>
+            </Box>
+            </Box>
             </Grid>
         </Grid>
         </List>
