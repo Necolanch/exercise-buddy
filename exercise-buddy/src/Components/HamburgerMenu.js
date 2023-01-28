@@ -38,8 +38,8 @@ const HamburgerMenu = (props) => {
               </IconButton>
               <Drawer anchor="right" variant="temporary" open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)}>
               <Box sx={{width: "20vw", p: 2, height: 1, backgroundColor: "#FDF151"}}>
-                <IconButton sx={{mb: 2}}>
-                  <CloseIcon onClick={toggleDrawer(false)} />
+                <IconButton onClick={toggleDrawer(false)} sx={{mb: 2}}>
+                  <CloseIcon />
                 </IconButton>
 
                 <ListItemButton>
