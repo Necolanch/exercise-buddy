@@ -27,9 +27,9 @@ const HamburgerMenu = (props) => {
       };
     return (
         <Box sx={{flexGrow:1}}>
-          <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)"}}>
+          <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)", padding:"1em"}}>
             <Toolbar>
-              <img src={require("../EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
+              <img src={require("../IMG/EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
               <Typography variant="h4" component="div" sx={{ flexGrow: 1, textAlign:"center" }}>
                 {props.title}
               </Typography>
