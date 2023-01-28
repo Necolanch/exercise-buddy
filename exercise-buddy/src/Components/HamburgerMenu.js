@@ -27,9 +27,9 @@ const HamburgerMenu = (props) => {
       };
     return (
         <Box sx={{flexGrow:1}}>
-          <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)"}}>
+          <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)", padding:"1em"}}>
             <Toolbar>
-              <img src={require("../EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
+              <img src={require("../IMG/EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
               <Typography variant="h4" component="div" sx={{ flexGrow: 1, textAlign:"center" }}>
                 {props.title}
               </Typography>
@@ -38,8 +38,8 @@ const HamburgerMenu = (props) => {
               </IconButton>
               <Drawer anchor="right" variant="temporary" open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)}>
               <Box sx={{width: "20vw", p: 2, height: 1, backgroundColor: "#FDF151"}}>
-                <IconButton sx={{mb: 2}}>
-                  <CloseIcon onClick={toggleDrawer(false)} />
+                <IconButton onClick={toggleDrawer(false)} sx={{mb: 2}}>
+                  <CloseIcon />
                 </IconButton>
 
                 <ListItemButton>

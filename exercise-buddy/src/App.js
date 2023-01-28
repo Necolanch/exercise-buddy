@@ -1,24 +1,17 @@
 import './App.css';
+import {Routes, Route} from "react-router-dom";
 
-import MyButton from './Components/Button';
-import { AddList, PlanList } from './Components/List';
-import HamburgerMenu from './Components/HamburgerMenu';
-import { SearchInput, NumberInput, DropDown } from './Components/Input';
-import Filter from './Components/Filter';
-import Description from './Components/Description';
+import Dashboard from './pages/Dashboard';
+import Search from './pages/Search';
 
+//Landing, signup, and login pages to come when I work on that functionality because they are extremely simple
 function App() {
   return (
     <div>
-      <MyButton/>
-      <AddList/>
-      <PlanList/>
-      <HamburgerMenu/>
-      <SearchInput/>
-      <NumberInput/>
-      <DropDown/>
-      <Filter/>
-      <Description/>
+      <Routes>
+        <Route path="/home" element={<Dashboard/>}/>
+        <Route path="/search" element={<Search/>}/>
+      </Routes>
     </div>
   );
 }
