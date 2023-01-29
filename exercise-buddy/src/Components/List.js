@@ -7,9 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
-import { Divider, Typography } from '@mui/material';
+import { Divider, Link, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ const AddList = (props) =>{
         <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -45,7 +46,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -57,7 +58,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -69,7 +70,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -83,6 +84,70 @@ const AddList = (props) =>{
         </ThemeProvider>
     )
 }
+
+const DayList = props => {
+  const navigate=useNavigate();
+    return (
+        <ThemeProvider theme={theme}>
+        <List sx={{display:"flex", flexDirection:"column", width:"20vw", marginLeft:"2em", marginTop:"1em"}}>
+          <Box sx={{width:"100%", display:"flex", alignItems:"center", justifyContent:"space-evenly"}}>
+          <Typography sx={{color:"white"}} variant="h6" component="h4">Edit Plan</Typography>
+          <Link href="http://localhost:3000/favorites">View Favorites</Link>
+          </Box>
+            <ListItem sx={{marginY:"1em"}} secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <RemoveIcon/>
+                    </IconButton>}>
+              <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
+              <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </ListItem>
+
+            <ListItem sx={{marginY:"1em"}} secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <RemoveIcon/>
+                    </IconButton>}>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
+              <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </ListItem>
+
+            <ListItem sx={{marginY:"1em"}} secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <RemoveIcon/>
+                    </IconButton>}>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
+              <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </ListItem>
+
+            <ListItem sx={{marginY:"1em"}} secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <RemoveIcon/>
+                    </IconButton>}>
+                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
+              <IconButton aria-label="edit">
+              <EditIcon/>
+            </IconButton>
+            </ListItem>
+        </List>
+        </ThemeProvider>
+)}
 
 const PlanList = (props) =>{
   const navigate=useNavigate();
@@ -575,6 +640,18 @@ AddList.defaultProps={
     muscle:"Triceps"
 }
 
+DayList.propTypes={
+  name: PropTypes.string,
+  sets: PropTypes.number,
+    reps: PropTypes.number,
+}
+
+DayList.defaultProps={
+  name:"Tricep Extension",
+  sets: 3,
+  reps: 10,
+}
+
 PlanList.propTypes={
     name: PropTypes.string,
     sets: PropTypes.number,
@@ -601,4 +678,4 @@ DashboardList.defaultProps={
   targetedMuscle:"Triceps"
 }
 
-export {AddList, PlanList, DashboardList}
+export {AddList, PlanList, DashboardList, DayList}
