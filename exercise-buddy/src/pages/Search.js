@@ -10,7 +10,7 @@ const Search = props => {
     return(
         <div>
             <HamburgerMenu/>
-            <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)"}}/>
+            <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
             
             <Box sx={{width:"100vw", display:"flex", alignItems:"center", marginY:"2em"}}>
             <SearchInput/>
