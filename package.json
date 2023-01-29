@@ -1,0 +1,18 @@
+{
+  "name": "wdv349-cruznicholas-fs",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "scripts": {
+    "server": "cd api; npm run devstart",
+    "react": "cd exercise-buddy && npm run start",
+    "client": "npm start --prefix exercise-buddy",
+    "clientinstall": "npm install --prefix exercise-buddy",
+    "dev": "concurrently \"npm run server\" \"npm run react\"",
+    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix exercise-buddy && npm run build --prefix exercise-buddy"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
