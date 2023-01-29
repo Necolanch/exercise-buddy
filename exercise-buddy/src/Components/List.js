@@ -34,7 +34,7 @@ const AddList = (props) =>{
         <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="add">
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -46,7 +46,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="add">
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -58,7 +58,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="add">
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
@@ -70,7 +70,7 @@ const AddList = (props) =>{
 
             <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
-                    <IconButton edge="end" aria-label="add">
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>
                     <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>

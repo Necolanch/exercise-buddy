@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { DayList } from "../Components/List";
 import { SearchInput } from "../Components/Input";
+import PopUp from "../Components/Popup";
 import Filter from "../Components/Filter";
 import { AddList } from "../Components/List";
 
 const EditPlan = props => {
+    const [open, setOpen]=useState(false);
+
+    const handleOpen=()=>{
+        setOpen(true)
+    }
+
+    const handleClose=()=>{
+        setOpen(false);
+    }
     return (
         <Box sx={{width:"100vw"}}>
             <HamburgerMenu/>
@@ -32,10 +43,12 @@ const EditPlan = props => {
 
                 <Box sx={{marginTop:"2em"}}>
                 <Typography sx={{color:"white", textAlign:"center", marginLeft:"-10em"}}>Results</Typography>
-                <AddList/>
+                <AddList handleOpen={handleOpen}/>
                 </Box>
             </Box>
           </Box>
+
+          <PopUp open={open} handleClose={handleClose}/>
         </Box>
     )
 }
