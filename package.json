@@ -5,12 +5,13 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "server": "cd api; npm run devstart",
+    "install-api": "npm install --prefix api",
+    "server": "cd api; nodemon server.js",
     "react": "cd exercise-buddy && npm run start",
     "client": "npm start --prefix exercise-buddy",
     "clientinstall": "npm install --prefix exercise-buddy",
     "dev": "concurrently \"npm run server\" \"npm run react\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix exercise-buddy && npm run build --prefix exercise-buddy"
+    "render-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";"
   },
   "dependencies": {
     "concurrently": "^7.6.0"
