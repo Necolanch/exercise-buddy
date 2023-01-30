@@ -1,0 +1,14 @@
+{
+  "name": "wdv349-cruznicholas-fs",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "main": "./api/server.js",
+  "scripts": {
+    "start": "cd ./api && node server.js"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
