@@ -9,7 +9,7 @@
     "install-reactjs": "npm install --prefix exercise-buddy",
     "install-api": "npm install --prefix api",
     "build-reactjs": "npm run build --prefix exercise-buddy",
-    "render-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
+    "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
     "start": "npm start --prefix api",
     "dev": "concurrently --raw \"npm run api\" \"npm run react\"",
     "react": "cd exercise-buddy && npm run start",
