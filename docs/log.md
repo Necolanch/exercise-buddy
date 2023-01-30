@@ -59,10 +59,12 @@ align with my desired tech stack.
 
 ### Week 4
 
-My final stand up...
-
-
-
-
+⚙️ Overview - This week I coded my frontend and deployed it on Render.
+<br>
+🌵 Challenges - I ran into problems with deploying on a new platform.
+<br>
+🏆 Accomplishments - I learned MaterialUI and deployed on a new platform.
+<br>
+🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
 
 <br>
