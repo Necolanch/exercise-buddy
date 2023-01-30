@@ -6,8 +6,8 @@
   },
   "scripts": {
     "install-api": "npm install --prefix api",
-    "server": "cd api; nodemon server.js",
-    "react": "cd exercise-buddy && npm run start",
+    "server": "npm run install-api && cd api; nodemon server.js",
+    "react": "npm run clientinstall && cd exercise-buddy && npm run start",
     "client": "npm start --prefix exercise-buddy",
     "clientinstall": "npm install --prefix exercise-buddy",
     "dev": "concurrently \"npm run server\" \"npm run react\"",
