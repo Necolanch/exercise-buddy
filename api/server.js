@@ -12,9 +12,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
     //*Set static folder up in production
-app.use(express.static(path.join(__dirname, "../exercise-buddy/build")));
+//app.use(express.static(path.join(__dirname, "../exercise-buddy/build")));
 
-app.get('/*', (req,res) => res.sendFile(path.resolve(__dirname, 'client', 'build','index.html')));
+//app.get('/*', (req,res) => res.sendFile(path.join(__dirname, '../exercise-buddy/build','index.html')));
 
 const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {

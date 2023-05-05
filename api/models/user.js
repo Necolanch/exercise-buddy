@@ -17,7 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     favorites: DataTypes.JSON,
-    plan: DataTypes.JSON
+    Sunday: DataTypes.JSON,
+    Monday: DataTypes.JSON,
+    Tuesday: DataTypes.JSON,
+    Wednesday: DataTypes.JSON,
+    Thursday: DataTypes.JSON,
+    Friday: DataTypes.JSON,
+    Saturday: DataTypes.JSON,
   }, {
     sequelize,
     modelName: 'User',

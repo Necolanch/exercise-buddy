@@ -18,7 +18,25 @@ module.exports = {
       favorites: {
         type: Sequelize.JSON
       },
-      plan: {
+      Sunday:{
+        type: Sequelize.JSON
+      },
+      Monday:{
+        type: Sequelize.JSON
+      },
+      Tuesday:{
+        type: Sequelize.JSON
+      },
+      Wednesday:{
+        type: Sequelize.JSON
+      },
+      Thursday:{
+        type: Sequelize.JSON
+      },
+      Friday:{
+        type: Sequelize.JSON
+      },
+      Saturday:{
         type: Sequelize.JSON
       },
       createdAt: {
