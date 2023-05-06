@@ -30,6 +30,16 @@ const remove=async(req,res)=>{
 //Find user, create copy of desired day, update account with copy of desired day array
 //New object of new exercise in it
 
+/* 
+"day":"Sunday",
+    "name":"Bicep Curl",
+    "type":"strength",
+    "muscle":"biceps",
+    "equipment":"dumbbell",
+    "difficulty":"beginner",
+    "instructions":"curl"
+*/
+
 const addToPlan=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
     const day=req.body.day;
@@ -46,10 +56,15 @@ const addToPlan=async(req,res)=>{
     console.log(updated)
 }
 
-
-
+const removeFromPlan=async(req,res)=>{
+    const user=await User.findOne({where:{id:req.params.id}});
+    const day=req.body.day;
+    const removed=await User.update({[day]:user.dataValues[day].filter(exercise=>exercise.name!==req.body.name)},
+    {where:{id:req.params.id}})
+                        .then(response=>console.log(response));
+}
 
 
 //For favorites
 
-module.exports={find, create, update, remove, addToPlan}
+module.exports={find, create, update, remove, addToPlan, removeFromPlan}
