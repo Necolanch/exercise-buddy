@@ -67,4 +67,23 @@ const removeFromPlan=async(req,res)=>{
 
 //For favorites
 
-module.exports={find, create, update, remove, addToPlan, removeFromPlan}
+const addToFavorites=async(req,res)=>{
+    const user=await User.findOne({where:{id:req.params.id}});
+    const updated=await User.update({favorites:[...user.dataValues.favorites, {
+        name:req.body.name,
+        type:req.body.type,
+        muscle:req.body.muscle,
+        equipment:req.body.equipment,
+        difficulty:req.body.difficulty,
+        instructions:req.body.instructions
+    }]},
+        {where:{id:req.params.id}})
+}
+
+const removeFavorites=async(req,res)=>{
+    const user=await User.findOne({where:{id:req.params.id}});
+    const updated=await User.update({favorites:user.dataValues.favorites.filter(exercise=>exercise.name!==req.body.name)},
+        {where:{id:req.params.id}})
+}
+
+module.exports={find, create, update, remove, addToPlan, removeFromPlan, addToFavorites, removeFavorites}
