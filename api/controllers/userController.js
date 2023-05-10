@@ -1,4 +1,6 @@
 const {User}=require("../models");
+const jwt = require("jsonwebtoken");
+const secret = `${process.env.SECRET_KEY}`;
 
 //Basic user model queries
 
@@ -10,8 +12,39 @@ const find = async(req,res)=>{
 
 //Account creation
 const create=async(req,res)=>{
-    const newUser=await User.findOrCreate({where:{username:req.body.username}},req.body);
-    res.status(200).json(newUser);
+    const existing=await User.findOne({where:{username:req.body.username}})
+    if (existing===null){
+        await User.create({
+            username:req.body.username,
+            password:req.body.password,
+            favorites:[],
+            Sunday:[],
+            Monday:[],
+            Tuesday:[],
+            Wednesday:[],
+            Thursday:[],
+            Friday:[],
+            Saturday:[],
+        })
+        .then(response=>{
+            const token=jwt.sign(
+                {
+                    id:response.dataValues.id,
+                    username:response.dataValues.username,
+                    password:response.dataValues.password
+                },
+                secret
+            );
+    
+            res.cookie("token", token, secret, {httpOnly:true}).json(response)
+        })
+        .catch((err)=>{
+            console.log(err)
+            res.status(500)
+        })
+    } else{
+        res.status(400).json({message:"Username already in use"})
+    }
 }
 
 const update=async(req,res)=>{
