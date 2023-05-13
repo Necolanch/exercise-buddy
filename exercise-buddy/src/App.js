@@ -8,6 +8,7 @@ import ViewExercise from './pages/ViewExercise';
 import Plan from './pages/Plan';
 import EditPlan from './pages/EditPlan';
 import Favorites from './pages/Favorites';
+import Signup from './pages/Signup';
 
 //Landing, signup, and login pages to come when I work on that functionality because they are extremely simple
 //When those pages are up the path for dashboard will be /home
@@ -16,6 +17,7 @@ function App() {
     <div>
       <Routes>
       <Route path="/" element={<Landing/>}/>
+      <Route path="/signup" element={<Signup/>}/>
         <Route path="/home" element={<Dashboard/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path="/view" element={<ViewExercise/>}/>
