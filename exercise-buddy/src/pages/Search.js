@@ -3,7 +3,7 @@ import HamburgerMenu from "../Components/HamburgerMenu";
 import { SearchInput } from "../Components/Input";
 import { AddList } from "../Components/List";
 import Filter from "../Components/Filter";
-import MyButton from "../Components/Button";
+import {MainButton} from "../Components/Button";
 import PopUp from "../Components/Popup";
 
 import { Box, Typography } from "@mui/material";
@@ -25,7 +25,7 @@ const Search = props => {
             
             <Box sx={{width:"100vw", display:"flex", alignItems:"center", marginY:"2em"}}>
             <SearchInput/>
-            <MyButton/>
+            <MainButton variant="contained"/>
 
             <Box sx={{display:"flex", flexDirection:"column", marginLeft:"25em"}}>
             <Typography sx={{color:"white"}}>Filter</Typography>

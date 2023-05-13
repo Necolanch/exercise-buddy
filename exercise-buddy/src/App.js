@@ -1,6 +1,7 @@
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 
+import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Search from './pages/Search';
 import ViewExercise from './pages/ViewExercise';
@@ -14,7 +15,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
+      <Route path="/" element={<Landing/>}/>
+        <Route path="/home" element={<Dashboard/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path="/view" element={<ViewExercise/>}/>
         <Route path="/plan" element={<Plan/>}/>
