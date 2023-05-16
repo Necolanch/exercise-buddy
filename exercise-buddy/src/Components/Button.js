@@ -25,7 +25,7 @@ const MainButton = (props) => {
 const ActionButton = (props) => {
   return (
     <ThemeProvider theme={actionTheme}>
-      <Button variant={props.variant}>{props.text}</Button>
+      <Button onClick={props.action} variant={props.variant}>{props.text}</Button>
     </ThemeProvider>
   );
 };
