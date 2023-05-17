@@ -4,7 +4,7 @@ const signup=(username, password, confirm)=>{
         console.log("passwords do not match")
         throw Error("Passwords do not match");
     } else{
-        return axios.post(`http://localhost:3030/user/create`, {username:username,password:password})
+        return axios.post(`http://localhost:3030/auth/create`, {username:username,password:password})
                 .then(response=>response)
                 .catch(err=>console.log(err))
     }
