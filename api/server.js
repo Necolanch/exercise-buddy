@@ -13,10 +13,6 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-    //*Set static folder up in production
-app.use(express.static(path.join(__dirname, "../exercise-buddy/build")));
-
-app.get('/*', (req,res) => res.sendFile(path.join(__dirname, '../exercise-buddy/build','index.html')));
 
 const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
@@ -28,6 +24,11 @@ try {
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+
+    //*Set static folder up in production
+    app.use(express.static(path.join(__dirname, "../exercise-buddy/build")));
+
+    app.get('/*', (req,res) => res.sendFile(path.join(__dirname, '../exercise-buddy/build','index.html')));
 
 app.listen(process.env.port || 3030, ()=>{
     console.log(`Server running on port ${process.env.port}`)
