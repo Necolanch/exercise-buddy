@@ -10,34 +10,44 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       favorites: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Sunday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Monday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Tuesday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Wednesday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Thursday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Friday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       Saturday:{
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        allowNull:false
       },
       createdAt: {
         allowNull: false,

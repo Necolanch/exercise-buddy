@@ -2,28 +2,48 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { PropTypes } from "prop-types";
 
-const theme = createTheme({
+const mainTheme = createTheme({
   palette: {
-    primary: { main: "#FDF151" },
-    cancel: { main: "#D63750" },
-    success: { main: "#7BEA9C" },
+    primary: { main: "#FDF151" }
   },
 });
 
-const MyButton = (props) => {
+const actionTheme = createTheme({
+  palette: {
+    primary: { main: "#7BEA9C" }
+  },
+});
+
+const MainButton = (props) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Button variant="outlined">{props.text}</Button>
+    <ThemeProvider theme={mainTheme}>
+      <Button variant={props.variant}>{props.text}</Button>
     </ThemeProvider>
   );
 };
 
-MyButton.propTypes = {
+const ActionButton = (props) => {
+  return (
+    <ThemeProvider theme={actionTheme}>
+      <Button onClick={props.action} variant={props.variant}>{props.text}</Button>
+    </ThemeProvider>
+  );
+};
+
+MainButton.propTypes = {
   text: PropTypes.string,
 };
 
-MyButton.defaultProps = {
+MainButton.defaultProps = {
   text: "Search",
 };
 
-export default MyButton;
+ActionButton.propTypes = {
+  text: PropTypes.string,
+};
+
+ActionButton.defaultProps = {
+  text: "Search",
+};
+
+export {MainButton, ActionButton};

@@ -8,12 +8,6 @@ const find = async(req,res)=>{
     res.status(200).json(user);
 }
 
-//Account creation
-const create=async(req,res)=>{
-    const newUser=await User.findOrCreate({where:{username:req.body.username}},req.body);
-    res.status(200).json(newUser);
-}
-
 const update=async(req,res)=>{
     const updateAccount=await User.update(req.body,{where:{id:req.params.id}});
     res.status(200).json(updateAccount)
@@ -43,7 +37,6 @@ const remove=async(req,res)=>{
 const addToPlan=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
     const day=req.body.day;
-    const copy = [...user.dataValues[day]];
     const updated=await User.update({[day]:[...user.dataValues[day], {
         name:req.body.name,
         type:req.body.type,
@@ -53,7 +46,6 @@ const addToPlan=async(req,res)=>{
         instructions:req.body.instructions
     }]},
         {where:{id:req.params.id}})
-    console.log(updated)
 }
 
 const removeFromPlan=async(req,res)=>{
@@ -86,4 +78,4 @@ const removeFavorites=async(req,res)=>{
         {where:{id:req.params.id}})
 }
 
-module.exports={find, create, update, remove, addToPlan, removeFromPlan, addToFavorites, removeFavorites}
+module.exports={find, update, remove, addToPlan, removeFromPlan, addToFavorites, removeFavorites}

@@ -67,4 +67,13 @@ align with my desired tech stack.
 <br>
 🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
 
+
+### Week 2 Project Portfolio 5
+
+⚙️ Overview - This week I programmed and tested my authorization for signup and authentication for login functionalities.
 <br>
+🌵 Challenges - I struggled getting back into the mind of front-end development, particularly with MaterialUI. It feels a little more restricting than what I remember.
+<br>
+🏆 Accomplishments - I learned how to send a JWT as an httpOnly cookie rather than storing it in localStorage for extra security.
+<br>
+🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
