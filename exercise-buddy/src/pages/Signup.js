@@ -14,7 +14,10 @@ const Signup=()=>{
         e.preventDefault();
         try {
             await authService.signup(username, password, confirmPassword)
-            .then(response=>{navigate("/home", error=>{console.error(error)})})
+            .then(response=>{
+                localStorage.setItem("user", JSON.stringify(response.user));
+                navigate("/home", error=>{console.error(error)})
+            })
         } catch (error) {
             console.error(error)
         }

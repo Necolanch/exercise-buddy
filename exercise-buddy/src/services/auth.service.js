@@ -5,11 +5,17 @@ const signup=(username, password, confirm)=>{
         throw Error("Passwords do not match");
     } else{
         return axios.post(`http://localhost:3030/auth/create`, {username:username,password:password})
-                .then(response=>response)
+                .then(response=>response.data)
                 .catch(err=>console.log(err))
     }
 }
 
-const authService={signup};
+const login=(username,password)=>{
+    return axios.post("http://localhost:3030/auth/login", {username:username, password:password})
+            .then(response=>response.data)
+            .catch(err=>console.log(err))
+}
+
+const authService={signup, login};
 
 export default authService;
