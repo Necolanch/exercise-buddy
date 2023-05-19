@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/auth.service";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { SearchInput } from "../Components/Input";
 import { AddList } from "../Components/List";
@@ -9,6 +11,19 @@ import PopUp from "../Components/Popup";
 import { Box, Typography } from "@mui/material";
 
 const Search = props => {
+    const user=JSON.parse(localStorage.getItem("user"))
+    const navigate=useNavigate();
+    useEffect(()=>{
+        authService.getUser(user.id)
+        .then(data=>{
+            console.log(data);
+            if (data.response.status===401) {
+                navigate("/")
+            }
+        })
+        .catch(err=>console.log(err))
+
+    }, [])
     const [open, setOpen]=useState(false);
 
     const handleOpen=()=>{
