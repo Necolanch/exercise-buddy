@@ -32,7 +32,10 @@ const AddList = (props) =>{
         <ThemeProvider theme={theme}>
         <List>
         <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
-            <Grid item xs={4} sm={5}>
+          {
+            props.exercises.map(exercise=>{
+              return(
+                <Grid item xs={4} sm={5}>
             <ListItem secondaryAction={
                     <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
@@ -40,45 +43,12 @@ const AddList = (props) =>{
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
+              <ListItemText primary={exercise.name} secondary={`Difficulty: ${exercise.difficulty} Muscle: ${exercise.muscle}`}/>
             </ListItem>
             </Grid>
-
-            <Grid item xs={4} sm={5}>
-            <ListItem secondaryAction={
-                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
-                      <AddIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
-            </ListItem>
-            </Grid>
-
-            <Grid item xs={4} sm={5}>
-            <ListItem secondaryAction={
-                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
-                      <AddIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
-            </ListItem>
-            </Grid>
-
-            <Grid item xs={4} sm={5}>
-            <ListItem secondaryAction={
-                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
-                      <AddIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`${props.difficulty} ${props.muscle}`}/>
-            </ListItem>
-            </Grid>
+              )
+            })
+          }
         </Grid>
         </List>
         </ThemeProvider>
