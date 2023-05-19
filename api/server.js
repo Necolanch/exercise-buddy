@@ -9,10 +9,27 @@ const authRouter=require("./routes/authRoutes");
 const userRouter=require("./routes/userRoutes");
 require("dotenv").config();
 
-app.use(cors());
+
+const corsConfig={origin:true, credentials:true}
+app.use(cors(corsConfig));
+app.options('*', cors(corsConfig));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+  
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "POST, PUT, GET, PATCH, DELETE");
+    }
+  
+    next();
+  });
 
 const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
