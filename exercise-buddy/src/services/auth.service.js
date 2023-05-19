@@ -16,6 +16,17 @@ const login=(username,password)=>{
             .catch(err=>console.log(err))
 }
 
-const authService={signup, login};
+const logout=()=>{return axios.post("http://localhost:3030/auth/logout",{},{withCredentials:true})
+                         .then(()=>{localStorage.removeItem("user")})
+                         .catch(err=>err)
+}
+
+const getUser=(id)=>{
+    return axios.get(`http://localhost:3030/user/${id}`, {withCredentials:true})
+            .then(response=>response.data)
+            .catch(err=>err)
+}
+
+const authService={signup, login, logout, getUser};
 
 export default authService;
