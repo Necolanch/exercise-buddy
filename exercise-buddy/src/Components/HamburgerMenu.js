@@ -44,7 +44,7 @@ const HamburgerMenu = (props) => {
                   <CloseIcon />
                 </IconButton>
 
-                <ListItemButton onClick={()=>navigate("/")}>
+                <ListItemButton onClick={()=>navigate("/home")}>
                     <ListItemIcon>
                         <HomeIcon/>
                     </ListItemIcon>
