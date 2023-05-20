@@ -2,6 +2,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { setDifficulty } from "../features/filters/filterSlice";
 
 const CheckboxIcon = styled("span")(({theme})=>({
     borderRadius:3,
@@ -41,9 +43,20 @@ const MyCheckbox=(props) =>{
 }
 
 const Filter = (props) => {
+  const difficultyState=useSelector(state=>state.filter.difficulty);
+  const dispatch=useDispatch();
+  const handleClick=(e)=>{
+    if (e.target.checked) {
+      dispatch(setDifficulty(e.target.labels[0].innerText.toLowerCase()));
+      console.log(difficultyState);
+    } else{
+      dispatch(setDifficulty(""));
+      console.log(difficultyState);
+    }
+  }
     return(
         <div>
-        <FormControlLabel sx={{color:"white"}} value={props.difficulty1} control={<MyCheckbox />} label={props.difficulty1} labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value={props.difficulty1} control={<MyCheckbox />} label={props.difficulty1} labelPlacement="end"/>
         <FormControlLabel sx={{color:"white"}} value={props.difficulty2} control={<MyCheckbox />} label={props.difficulty2} labelPlacement="end"/>
         <FormControlLabel sx={{color:"white"}} value={props.difficulty3} control={<MyCheckbox />} label={props.difficulty3} labelPlacement="end"/>
         </div>
@@ -57,9 +70,9 @@ Filter.propTypes = {
   };
   
 Filter.defaultProps = {
-    difficulty1: "Easy",
+    difficulty1: "Beginner",
     difficulty2: "Intermediate",
-    difficulty3: "Hard",
+    difficulty3: "Expert",
   };
 
 export default Filter
