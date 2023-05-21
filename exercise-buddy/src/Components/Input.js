@@ -9,6 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 
+import { useDispatch } from "react-redux";
+import { setName } from "../features/filters/filterSlice";
+
 const CustomTextField = styled(TextField)({
     "label":{
         paddingTop:".5em",
@@ -17,8 +20,12 @@ const CustomTextField = styled(TextField)({
 })
 
 const SearchInput = (props) => {
+    const dispatch=useDispatch();
+    const handleChange=e=>{
+        dispatch(setName(e.target.value));
+    }
     return(
-        <CustomTextField placeholder={props.placeholder} variant="standard" label={props.label} InputProps={{
+        <CustomTextField onChange={handleChange} placeholder={props.placeholder} variant="standard" label={props.label} InputProps={{
             startAdornment:(
                 <InputAdornment position="start">
                   <SearchIcon sx={{paddingLeft:".5em"}}/>

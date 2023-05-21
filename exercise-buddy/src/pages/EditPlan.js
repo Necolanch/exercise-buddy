@@ -6,7 +6,7 @@ import HamburgerMenu from "../Components/HamburgerMenu";
 import { DayList } from "../Components/List";
 import { SearchInput } from "../Components/Input";
 import PopUp from "../Components/Popup";
-import Filter from "../Components/Filter";
+import {DifficultyFilter} from "../Components/Filter";
 import { AddList } from "../Components/List";
 
 
@@ -49,12 +49,12 @@ const EditPlan = props => {
 
                 <Box sx={{display:"flex", alignItems:"center"}}>
                 <Typography sx={{color:"white", marginRight:"1em"}}>Difficulty</Typography>
-                <Filter/>
+                <DifficultyFilter/>
                 </Box>
 
                 <Box sx={{display:"flex", alignItems:"center"}}>
                 <Typography sx={{color:"white", marginRight:"1em"}}>Muscle</Typography>
-                <Filter/>
+                
                 </Box>
 
                 <Box sx={{marginTop:"2em"}}>

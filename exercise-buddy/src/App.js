@@ -11,9 +11,12 @@ import Favorites from './pages/Favorites';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
+import { useSelector } from "react-redux";
+
 //Landing, signup, and login pages to come when I work on that functionality because they are extremely simple
 //When those pages are up the path for dashboard will be /home
 function App() {
+  const state = useSelector(state=>state.filter);
   return (
     <div>
       <Routes>
@@ -21,7 +24,7 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/login" element={<Login/>}/>
         <Route path="/home" element={<Dashboard/>}/>
-        <Route path="/search" element={<Search/>}/>
+        <Route path="/search" element={<Search state={state}/>}/>
         <Route path="/view" element={<ViewExercise/>}/>
         <Route path="/plan" element={<Plan/>}/>
         <Route path="/edit" element={<EditPlan/>}/>
