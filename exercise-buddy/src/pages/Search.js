@@ -5,9 +5,10 @@ import apiService from "../services/api.service";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { SearchInput } from "../Components/Input";
 import { AddList } from "../Components/List";
-import Filter from "../Components/Filter";
-import {MainButton} from "../Components/Button";
+import {DifficultyFilter, MuscleFilter} from "../Components/Filter";
+import {MainButton, ActionButton} from "../Components/Button";
 import PopUp from "../Components/Popup";
+
 
 import { Box, Typography } from "@mui/material";
 
@@ -17,6 +18,10 @@ const Search = props => {
 
     const [open, setOpen]=useState(false);
     const [search, setSearch]=useState([]);
+
+    //const state = useSelector(state=>state.filter);
+    //console.log(state);
+    const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.state.difficulty}&name=${props.state.name}&muscle=${props.state.muscle}&type=${props.state.type}`
     useEffect(()=>{
         authService.getUser(user.id)
         .then(data=>{
@@ -26,13 +31,13 @@ const Search = props => {
         })
         .catch(err=>console.log(err))
 
-        apiService.normal(`https://api.api-ninjas.com/v1/exercises`)
+        apiService.normal(url)
         .then(data=>{
             setSearch(data.data);
         })
         .catch(err=>console.log(err))
 
-    }, [])
+    }, [props.state.name])
 
     const handleOpen=()=>{
         setOpen(true)
@@ -41,6 +46,14 @@ const Search = props => {
     const handleClose=()=>{
         setOpen(false);
     }
+
+     const applyFilters=()=>{
+        apiService.normal(url)
+        .then(data=>{
+            setSearch(data.data);
+        })
+        .catch(err=>console.log(err))
+    } 
     return(
         <Box sx={{width:"100vw"}}>
             <HamburgerMenu/>
@@ -52,8 +65,11 @@ const Search = props => {
 
             <Box sx={{display:"flex", flexDirection:"column", marginLeft:"25em"}}>
             <Typography sx={{color:"white"}}>Filter</Typography>
-            <Filter/>
-            <Filter/>
+            <Typography sx={{color:"white", marginTop:"1em"}}>Difficulty</Typography>
+            <DifficultyFilter/>
+            <Typography sx={{color:"white", marginTop:"1em"}}>Muscle</Typography>
+            <MuscleFilter/>
+            <ActionButton width="15%" action={applyFilters} variant="outlined" text="Apply Filters" />
             </Box>
 
             </Box>

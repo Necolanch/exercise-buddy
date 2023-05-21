@@ -13,9 +13,15 @@ export const filterSlice=createSlice({
     reducers:{
         setDifficulty:(state,action)=>{
             state.difficulty=action.payload
-        }
+        },
+        setName:(state,action)=>{
+            state.name=action.payload
+        },
+        setMuscle:(state,action)=>{
+            state.muscle=action.payload
+        },
     }
 })
 
-export const {setDifficulty}=filterSlice.actions;
+export const {setDifficulty, setName, setMuscle}=filterSlice.actions;
 export default filterSlice.reducer;
