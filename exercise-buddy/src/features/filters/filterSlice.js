@@ -20,8 +20,11 @@ export const filterSlice=createSlice({
         setMuscle:(state,action)=>{
             state.muscle=action.payload
         },
+        setType:(state,action)=>{
+            state.type=action.payload
+        }
     }
 })
 
-export const {setDifficulty, setName, setMuscle}=filterSlice.actions;
+export const {setDifficulty, setName, setMuscle, setType}=filterSlice.actions;
 export default filterSlice.reducer;

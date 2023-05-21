@@ -3,7 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 import { useDispatch } from "react-redux";
-import { setDifficulty, setMuscle } from "../features/filters/filterSlice";
+import { setDifficulty, setMuscle, setType } from "../features/filters/filterSlice";
 
 const CheckboxIcon = styled("span")(({theme})=>({
     borderRadius:"50%",
@@ -65,12 +65,13 @@ const MuscleFilter = () => {
       console.log(e.target)
       dispatch(setMuscle(e.target.labels[0].id.toLowerCase()));
     } else{
-      dispatch(setDifficulty(""));
+      dispatch(setMuscle(""));
     }
   }
     return(
         <Box sx={{marginTop:"1em"}}>
         <RadioGroup sx={{display:"flex", flexDirection:"row"}}>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="any" id="" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="Any" labelPlacement="end"/>
         <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="abdominals" id="abdominals" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="abdominals" labelPlacement="end"/>
         <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="abductors" id="abductors" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="abductors" labelPlacement="end"/>
         <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="adductors" id="adductors" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="adductors" labelPlacement="end"/>
@@ -92,6 +93,32 @@ const MuscleFilter = () => {
     )
 }
 
+const TypeFilter = (props) => {
+  const dispatch=useDispatch();
+  const handleClick=(e)=>{
+    console.log(e.target)
+    if (e.target.checked) {
+      dispatch(setType(e.target.labels[0].id.toLowerCase()));
+    } else{
+      dispatch(setType(""));
+    }
+  }
+    return(
+        <Box>
+        <RadioGroup sx={{display:"flex", flexDirection:"row"}}>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="any" id="" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="Any" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="cardio" id="cardio" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="cardio" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="olympic_weightlifting" id="olympic_weightlifting" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>}/>} label="olympic weightlifting" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="plyometrics" id="plyometrics" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>} />} label="plyometrics" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="powerlifting" id="powerlifting" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>} />} label="powerlifting" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="strength" id="strength" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>} />} label="strength" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="stretching" id="stretching" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>} />} label="stretching" labelPlacement="end"/>
+        <FormControlLabel onClick={handleClick} sx={{color:"white"}} value="strongman" id="strongman" control={<Radio checkedIcon={<CheckedIcon/>} icon={<CheckboxIcon/>} />} label="strongman" labelPlacement="end"/>
+        </RadioGroup>
+        </Box>
+    )
+}
+
 DifficultyFilter.propTypes = {
     difficulty1: PropTypes.string,
     difficulty2: PropTypes.string,
@@ -104,4 +131,4 @@ DifficultyFilter.defaultProps = {
     difficulty3: "Expert",
   };
 
-export {DifficultyFilter, MuscleFilter}
+export {DifficultyFilter, MuscleFilter, TypeFilter}
