@@ -5,7 +5,7 @@ import apiService from "../services/api.service";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { SearchInput } from "../Components/Input";
 import { AddList } from "../Components/List";
-import {DifficultyFilter, MuscleFilter} from "../Components/Filter";
+import {DifficultyFilter, MuscleFilter, TypeFilter} from "../Components/Filter";
 import {MainButton, ActionButton} from "../Components/Button";
 import PopUp from "../Components/Popup";
 
@@ -69,6 +69,8 @@ const Search = props => {
             <DifficultyFilter/>
             <Typography sx={{color:"white", marginTop:"1em"}}>Muscle</Typography>
             <MuscleFilter/>
+            <Typography sx={{color:"white", marginTop:"1em"}}>Type</Typography>
+            <TypeFilter/>
             <ActionButton width="15%" action={applyFilters} variant="outlined" text="Apply Filters" />
             </Box>
 
