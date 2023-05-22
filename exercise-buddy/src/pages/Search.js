@@ -37,7 +37,7 @@ const Search = props => {
         })
         .catch(err=>console.log(err))
 
-    }, [props.state.name])
+    }, [])
 
     const handleOpen=()=>{
         setOpen(true)
@@ -61,7 +61,7 @@ const Search = props => {
             
             <Box sx={{width:"100vw", display:"flex", alignItems:"center", marginY:"2em"}}>
             <SearchInput/>
-            <MainButton variant="outlined"/>
+            <MainButton action={applyFilters} variant="outlined"/>
 
             <Box sx={{display:"flex", flexDirection:"column", marginLeft:"25em"}}>
             <Typography sx={{color:"white"}}>Filter</Typography>
