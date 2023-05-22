@@ -9,8 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setName } from "../features/filters/filterSlice";
+import { setDay } from "../features/exercise/exerciseSlice";
 
 const CustomTextField = styled(TextField)({
     "label":{
@@ -37,26 +38,28 @@ const SearchInput = (props) => {
 
 const NumberInput = (props) => {
     return(
-        <TextField variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"5vw", textAlign:"center"}}/>
+        <TextField onChange={props.action} defaultValue={props.number} variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"5vw", textAlign:"center"}}/>
     )
 }
 
 const DropDown = (props) => {
-    const [day,setDay]=useState("");
-    const handleChange = (event) => {
-        setDay(event.target.value);
+    const state = useSelector(state=>state.exercise);
+    const dispatch=useDispatch();
+    const handleChange = (e) => {
+        dispatch(setDay(e.target.id));
+        console.log(state);
       };
     return(
         <Box>
         <InputLabel id="demo-simple-select-label" sx={{color:"#FAFAFF"}}>Day</InputLabel>
-        <Select labelId="demo-simple-select-label" id="demo-simple-select" value={day} label="Day" sx={{width:"10vw", backgroundColor:"#FAFAFF"}} onChange={handleChange}>
-          <MenuItem value="Sunday">Sunday</MenuItem>
-          <MenuItem value="Monday">Monday</MenuItem>
-          <MenuItem value="Tuesday">Tuesday</MenuItem>
-          <MenuItem value="Wednesday">Wednesday</MenuItem>
-          <MenuItem value="Thursday">Thursday</MenuItem>
-          <MenuItem value="Friday">Friday</MenuItem>
-          <MenuItem value="Saturday">Saturday</MenuItem>
+        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Day" value={state.day} sx={{width:"10vw", backgroundColor:"#FAFAFF"}}>
+          <MenuItem id="Sunday" onClick={handleChange} value="Sunday">Sunday</MenuItem>
+          <MenuItem id="Monday" onClick={handleChange} value="Monday">Monday</MenuItem>
+          <MenuItem id="Tuesday" onClick={handleChange} value="Tuesday">Tuesday</MenuItem>
+          <MenuItem id="Wednesday" onClick={handleChange} value="Wednesday">Wednesday</MenuItem>
+          <MenuItem id="Thursday" onClick={handleChange} value="Thursday">Thursday</MenuItem>
+          <MenuItem id="Friday" onClick={handleChange} value="Friday">Friday</MenuItem>
+          <MenuItem id="Saturday" onClick={handleChange} value="Saturday">Saturday</MenuItem>
         </Select>
         </Box>
     )

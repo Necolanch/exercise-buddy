@@ -81,7 +81,7 @@ const Search = props => {
             <AddList exercises={search} handleOpen={handleOpen}/>
             </Box>
 
-            <PopUp open={open} handleClose={handleClose}/>
+            <PopUp method="Add" open={open} handleClose={handleClose}/>
         </Box>
     )
 }

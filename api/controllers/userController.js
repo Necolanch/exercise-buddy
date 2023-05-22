@@ -36,16 +36,20 @@ const remove=async(req,res)=>{
 
 const addToPlan=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
-    const day=req.body.day;
+    const day=req.body.exercise.day;
     const updated=await User.update({[day]:[...user.dataValues[day], {
-        name:req.body.name,
-        type:req.body.type,
-        muscle:req.body.muscle,
-        equipment:req.body.equipment,
-        difficulty:req.body.difficulty,
-        instructions:req.body.instructions
+        name:req.body.exercise.name,
+        type:req.body.exercise.type,
+        muscle:req.body.exercise.muscle,
+        equipment:req.body.exercise.equipment,
+        difficulty:req.body.exercise.difficulty,
+        instructions:req.body.exercise.instructions,
+        sets:req.body.exercise.sets,
+        reps:req.body.exercise.reps
     }]},
         {where:{id:req.params.id}})
+        .then(response=>res.status(200).json(response))
+        .catch(err=>res.status(500).json(err))
 }
 
 const removeFromPlan=async(req,res)=>{
@@ -53,7 +57,8 @@ const removeFromPlan=async(req,res)=>{
     const day=req.body.day;
     const removed=await User.update({[day]:user.dataValues[day].filter(exercise=>exercise.name!==req.body.name)},
     {where:{id:req.params.id}})
-                        .then(response=>console.log(response));
+    .then(response=>res.status(200).json(response))
+    .catch(err=>res.status(500).json(err))
 }
 
 
@@ -70,12 +75,16 @@ const addToFavorites=async(req,res)=>{
         instructions:req.body.instructions
     }]},
         {where:{id:req.params.id}})
+        .then(response=>res.status(200).json(response))
+        .catch(err=>res.status(500).json(err))
 }
 
 const removeFavorites=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
     const updated=await User.update({favorites:user.dataValues.favorites.filter(exercise=>exercise.name!==req.body.name)},
         {where:{id:req.params.id}})
+        .then(response=>res.status(200).json(response))
+        .catch(err=>res.status(500).json(err))
 }
 
 module.exports={find, update, remove, addToPlan, removeFromPlan, addToFavorites, removeFavorites}
