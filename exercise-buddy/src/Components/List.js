@@ -13,6 +13,8 @@ import { PropTypes } from "prop-types";
 import { Divider, Link, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setExercise } from "../features/exercise/exerciseSlice";
 
 const theme=createTheme({
     components:{
@@ -28,6 +30,10 @@ const theme=createTheme({
 
 const AddList = (props) =>{
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
     return (
         <ThemeProvider theme={theme}>
         <List>
@@ -36,7 +42,7 @@ const AddList = (props) =>{
             props.exercises.map(exercise=>{
               return(
                 <Grid item xs={4} sm={5}>
-            <ListItem secondaryAction={
+            <ListItem onClick={()=>selectExercise(exercise)} secondaryAction={
                     <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
                     </IconButton>}>

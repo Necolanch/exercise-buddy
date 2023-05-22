@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { DropDown, NumberInput } from './Input';
+import {ActionButton} from "../Components/Button";
+import { useSelector } from 'react-redux';
 
 const style = {
     position: 'absolute',
@@ -16,13 +18,15 @@ const style = {
   }
 
 const PopUp = (props) => {
+  const state=useSelector(state=>state.exercise);
     return(
         <Modal open={props.open} onClose={props.handleClose}>
           <Box sx={{style}}>
-            <Typography variant="h3" component="h3">Add {props.exerciseName}</Typography>
+            <Typography sx={{color:"white"}} variant="h4" component="h3">Add {state.exercise.name}</Typography>
             <DropDown/>
             <NumberInput label="Sets"/>
             <NumberInput label="Reps"/>
+            <ActionButton variant="contained" text="Add"/>
           </Box>
         </Modal>
     )
