@@ -23,19 +23,24 @@ const Search = props => {
     //console.log(state);
     const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.state.difficulty}&name=${props.state.name}&muscle=${props.state.muscle}&type=${props.state.type}`
     useEffect(()=>{
+        if (!user) {
+            navigate("/")
+        }else{
         authService.getUser(user.id)
         .then(data=>{
+            console.log(data);
             if (data.response.status===401) {
                 navigate("/")
             }
         })
-        .catch(err=>console.log(err))
-
+        .catch(err=>console.log(err));
+        
         apiService.normal(url)
         .then(data=>{
             setSearch(data.data);
         })
         .catch(err=>console.log(err))
+    }
 
     }, [])
 

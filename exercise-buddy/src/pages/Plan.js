@@ -9,6 +9,9 @@ const Plan = props => {
   const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
     useEffect(()=>{
+        if (!user) {
+            navigate("/")
+        }else{
         authService.getUser(user.id)
         .then(data=>{
             console.log(data);
@@ -17,6 +20,7 @@ const Plan = props => {
             }
         })
         .catch(err=>console.log(err))
+    }
 
     }, [])
     return(

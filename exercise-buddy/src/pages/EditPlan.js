@@ -14,6 +14,9 @@ const EditPlan = props => {
     const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
     useEffect(()=>{
+        if (!user) {
+            navigate("/")
+        }else{
         authService.getUser(user.id)
         .then(data=>{
             console.log(data);
@@ -22,6 +25,7 @@ const EditPlan = props => {
             }
         })
         .catch(err=>console.log(err))
+    }
 
     }, [])
     const [open, setOpen]=useState(false);
