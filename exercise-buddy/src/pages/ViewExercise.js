@@ -11,7 +11,6 @@ const ViewExercise = props => {
     useEffect(()=>{
         authService.getUser(user.id)
         .then(data=>{
-            console.log(data);
             if (data.response.status===401) {
                 navigate("/")
             }

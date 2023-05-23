@@ -3,21 +3,26 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { PropTypes } from "prop-types";
 import { IconButton } from '@mui/material';
+import {useSelector} from "react-redux";
 
 const Description = props => {
+    const state=useSelector(state=>state.exercise);
+    console.log(state);
     return(
         <Box sx={{width:"70vw", display:"flex", flexDirection:"column", alignItems:"center", margin:"0 auto"}}>
             <Box sx={{display:"flex", alignItems:"center"}}>
-            <Typography variant="h4" component="h3" sx={{fontWeight:600, color:"#7BEA9C"}}>{props.exerciseName}</Typography>
+            <Typography variant="h4" component="h3" sx={{fontWeight:600, color:"#7BEA9C"}}>{state.exercise.name}</Typography>
             <IconButton sx={{marginLeft:"1em"}}>
             <FavoriteBorderIcon/>
             </IconButton>
             </Box>
             <Box sx={{width:"70%", display:"flex", justifyContent:"space-evenly", marginTop:"1em", color:"white"}}>
-                <Typography>{props.difficulty}</Typography>
-                <Typography>{props.muscle}</Typography>
+                <Typography>Difficulty: {state.exercise.difficulty}</Typography>
+                <Typography>Muscle group: {state.exercise.muscle}</Typography>
+                <Typography>Equipment: {state.exercise.equipment}</Typography>
+                <Typography>Exercise type: {state.exercise.type}</Typography>
             </Box>
-            <Typography sx={{marginTop:"2em", color:"white"}} variant="body1" component="p">{props.instructions}</Typography>
+            <Typography sx={{marginTop:"2em", color:"white"}} variant="body1" component="p">{state.exercise.instructions}</Typography>
         </Box>
     )
 }
