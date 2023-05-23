@@ -9,13 +9,18 @@ const ViewExercise = props => {
   const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
     useEffect(()=>{
-        authService.getUser(user.id)
-        .then(data=>{
-            if (data.response.status===401) {
-                navigate("/")
-            }
-        })
-        .catch(err=>console.log(err))
+      if (!user) {
+        navigate("/")
+    }else{
+    authService.getUser(user.id)
+    .then(data=>{
+        console.log(data);
+        if (data.response.status===401) {
+            navigate("/")
+        }
+    })
+    .catch(err=>console.log(err))
+}
 
     }, [])
     return(
