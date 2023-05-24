@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/auth.service";
 import { Box, Divider, Typography } from "@mui/material";
 import HamburgerMenu from "../Components/HamburgerMenu";
-import Filter from "../Components/Filter";
+import {DifficultyFilter} from "../Components/Filter";
 import PopUp from "../Components/Popup";
 import { AddList } from "../Components/List";
 
 const Favorites = props => {
+    const user=JSON.parse(localStorage.getItem("user"))
+    const navigate=useNavigate();
+    useEffect(()=>{
+        if (!user) {
+            navigate("/")
+        }else{
+        authService.getUser(user.id)
+        .then(data=>{
+            console.log(data);
+            if (data.response.status===401) {
+                navigate("/")
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    }, [])
     const [open, setOpen]=useState(false);
 
     const handleOpen=()=>{
@@ -27,9 +46,9 @@ const Favorites = props => {
               <Divider sx={{backgroundColor:"#99D7DB"}}/>
                 <Box sx={{display:"flex", flexDirection:"column", marginTop:"1em"}}>
                 <Typography>Difficulty</Typography>
-                <Filter/>
+                <DifficultyFilter/>
                 <Typography sx={{marginTop:"1em"}}>Muscle</Typography>
-                <Filter/>
+                
                 </Box>
               </Box>
             </Box>

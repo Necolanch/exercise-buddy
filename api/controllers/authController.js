@@ -30,7 +30,18 @@ const create=async(req,res)=>{
                 secret
             );
     
-            res.cookie("token", token, secret, {httpOnly:true}).json(response)
+            res.cookie("token", token, secret, {httpOnly:true}).json({user:{
+                id:response.dataValues.id,
+                username:response.dataValues.username,
+                favorites: response.dataValues.favorites,
+                Sunday:response.dataValues.Sunday,
+            Monday:response.dataValues.Monday,
+            Tuesday:response.dataValues.Tuesday,
+            Wednesday:response.dataValues.Wednesday,
+            Thursday:response.dataValues.Thursday,
+            Friday:response.dataValues.Friday,
+            Saturday:response.dataValues.Saturday
+        }})
         })
         .catch((err)=>{
             res.status(500)
@@ -58,7 +69,23 @@ const login = async(req,res)=>{
     }
 
     const token=jwt.sign({id:user.dataValues.id}, secret)
-    res.cookie("token", token, secret, {httpOnly:true}).json({message:"Logged in"})
+    res.cookie("token", token, secret, {httpOnly:true}).json({message:"Logged in",user:{
+        id:user.dataValues.id,
+        username:user.dataValues.username,
+        favorites: user.dataValues.favorites,
+        Sunday:user.dataValues.Sunday,
+    Monday:user.dataValues.Monday,
+    Tuesday:user.dataValues.Tuesday,
+    Wednesday:user.dataValues.Wednesday,
+    Thursday:user.dataValues.Thursday,
+    Friday:user.dataValues.Friday,
+    Saturday:user.dataValues.Saturday
+    }})
 }
 
-module.exports={create, login}
+const logout=async(req,res)=>{
+    res.clearCookie("token");
+    res.status(200).json({message:"Logged out"});
+}
+
+module.exports={create, login, logout}

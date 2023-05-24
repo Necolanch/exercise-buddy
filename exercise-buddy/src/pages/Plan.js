@@ -1,8 +1,28 @@
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { PlanList } from "../Components/List";
 import { Box } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/auth.service";
 
 const Plan = props => {
+  const user=JSON.parse(localStorage.getItem("user"))
+    const navigate=useNavigate();
+    useEffect(()=>{
+        if (!user) {
+            navigate("/")
+        }else{
+        authService.getUser(user.id)
+        .then(data=>{
+            console.log(data);
+            if (data.response.status===401) {
+                navigate("/")
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    }, [])
     return(
         <Box>
           <HamburgerMenu/>
