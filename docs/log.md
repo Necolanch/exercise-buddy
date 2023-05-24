@@ -77,3 +77,13 @@ align with my desired tech stack.
 🏆 Accomplishments - I learned how to send a JWT as an httpOnly cookie rather than storing it in localStorage for extra security.
 <br>
 🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
+
+### Week 3 Project Portfolio 5
+
+⚙️ Overview - This week I connected some of the frontend to the backend and managed state through Redux Toolkit.
+<br>
+🌵 Challenges - I had a tough time getting the radio buttons for the filters to differentiate between being checked. I was not naming that at first.
+<br>
+🏆 Accomplishments - I learned Redux Toolkit.
+<br>
+🔮 Next Steps - I plan to finish connecting the frontend and testing it.
