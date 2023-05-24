@@ -3,17 +3,20 @@ import { useNavigate } from "react-router-dom";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import { DashboardList } from "../Components/List";
 import authService from "../services/auth.service";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../features/user/userSlice";
 
 const Dashboard=props=>{
     const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
+    const dispatch=useDispatch();
     useEffect(()=>{
         if (!user) {
             navigate("/")
         }else{
         authService.getUser(user.id)
         .then(data=>{
-            console.log(data);
+            dispatch(setUser(data));
             if (data.response.status===401) {
                 navigate("/")
             }
@@ -22,6 +25,8 @@ const Dashboard=props=>{
     }
 
     }, [])
+
+    const state=useSelector(state=>state.user);
     return(
         <div>
         <HamburgerMenu/>

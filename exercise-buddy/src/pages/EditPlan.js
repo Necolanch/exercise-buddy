@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { Box, Typography } from "@mui/material";
@@ -13,13 +15,14 @@ import { AddList } from "../Components/List";
 const EditPlan = props => {
     const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
+    const dispatch=useDispatch();
     useEffect(()=>{
         if (!user) {
             navigate("/")
         }else{
         authService.getUser(user.id)
         .then(data=>{
-            console.log(data);
+            dispatch(setUser(data));
             if (data.response.status===401) {
                 navigate("/")
             }
@@ -29,6 +32,8 @@ const EditPlan = props => {
 
     }, [])
     const [open, setOpen]=useState(false);
+    const state=useSelector(state=>state.user);
+    console.log(state)
 
     const handleOpen=()=>{
         setOpen(true)
