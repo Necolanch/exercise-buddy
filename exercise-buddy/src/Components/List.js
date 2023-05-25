@@ -127,6 +127,10 @@ const DayList = props => {
 
 const PlanList = (props) =>{
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
     return (
         <ThemeProvider theme={theme}>
         <List>
@@ -141,10 +145,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Sunday.map(exercise=>{
+              props.state.Sunday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -167,10 +171,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Monday.map(exercise=>{
+              props.state.Monday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -178,7 +182,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>
@@ -194,10 +197,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Tuesday.map(exercise=>{
+              props.state.Tuesday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -205,7 +208,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>
@@ -221,10 +223,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Wednesday.map(exercise=>{
+              props.state.Wednesday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -232,7 +234,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>
@@ -248,10 +249,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Thursday.map(exercise=>{
+              props.state.Thursday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -259,7 +260,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>
@@ -275,10 +275,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Friday.map(exercise=>{
+              props.state.Friday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -286,7 +286,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>
@@ -302,10 +301,10 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
             {
-              props.state.user.Saturday.map(exercise=>{
+              props.state.Saturday.map(exercise=>{
                 return(
                   <Box sx={{width:"20vw"}}>
-            <ListItem>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
@@ -313,7 +312,6 @@ const PlanList = (props) =>{
             </ListItem>
             </Box>
                 )
-                
               })
             }
             </Box>

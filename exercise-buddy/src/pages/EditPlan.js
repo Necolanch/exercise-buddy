@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../features/user/userSlice";
+//import { setUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { Box, Typography } from "@mui/material";
@@ -22,7 +22,7 @@ const EditPlan = props => {
         }else{
         authService.getUser(user.id)
         .then(data=>{
-            dispatch(setUser(data));
+            //dispatch(setUser(data));
             if (data.response.status===401) {
                 navigate("/")
             }
