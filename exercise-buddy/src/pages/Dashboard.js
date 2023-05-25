@@ -4,7 +4,7 @@ import HamburgerMenu from "../Components/HamburgerMenu";
 import { DashboardList } from "../Components/List";
 import authService from "../services/auth.service";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../features/user/userSlice";
+import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday} from "../features/user/userSlice";
 
 const Dashboard=props=>{
     const user=JSON.parse(localStorage.getItem("user"))
@@ -16,17 +16,24 @@ const Dashboard=props=>{
         }else{
         authService.getUser(user.id)
         .then(data=>{
-            dispatch(setUser(data));
+            dispatch(setUsername(data.username));
+            dispatch(setId(data.id));
+            dispatch(setSunday(data.Sunday));
+            dispatch(setMonday(data.Monday));
+            dispatch(setTuesday(data.Tuesday));
+            dispatch(setWednesday(data.Wednesday));
+            dispatch(setThursday(data.Thursday));
+            dispatch(setFriday(data.Friday));
+            dispatch(setSaturday(data.Saturday));
+            dispatch(setFavorites(data.favorites));
             if (data.response.status===401) {
                 navigate("/")
             }
         })
         .catch(err=>console.log(err))
     }
-
     }, [])
 
-    const state=useSelector(state=>state.user);
     return(
         <div>
         <HamburgerMenu/>
