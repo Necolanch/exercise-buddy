@@ -11,12 +11,32 @@ import Favorites from './pages/Favorites';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
-import { useSelector } from "react-redux";
+import authService from './services/auth.service';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday} from "./features/user/userSlice";
 
-//Landing, signup, and login pages to come when I work on that functionality because they are extremely simple
-//When those pages are up the path for dashboard will be /home
 function App() {
-  const state = useSelector(state=>state.filter);
+  const user=JSON.parse(localStorage.getItem("user"));
+  const dispatch=useDispatch();
+  useEffect(()=>{
+authService.getUser(user.id)
+        .then(data=>{
+            dispatch(setUsername(data.username));
+            dispatch(setId(data.id));
+            dispatch(setSunday(data.Sunday));
+            dispatch(setMonday(data.Monday));
+            dispatch(setTuesday(data.Tuesday));
+            dispatch(setWednesday(data.Wednesday));
+            dispatch(setThursday(data.Thursday));
+            dispatch(setFriday(data.Friday));
+            dispatch(setSaturday(data.Saturday));
+            dispatch(setFavorites(data.favorites));
+        })
+        .catch(err=>console.log(err))
+  },[])
+  const filterState = useSelector(state=>state.filter);
+  const userState=useSelector(state=>state.user);
   return (
     <div>
       <Routes>
@@ -24,10 +44,10 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/login" element={<Login/>}/>
         <Route path="/home" element={<Dashboard/>}/>
-        <Route path="/search" element={<Search state={state}/>}/>
+        <Route path="/search" element={<Search state={filterState}/>}/>
         <Route path="/view" element={<ViewExercise/>}/>
         <Route path="/plan" element={<Plan/>}/>
-        <Route path="/edit" element={<EditPlan/>}/>
+        <Route path="/edit" element={<EditPlan filterState={filterState}/>}/>
         <Route path="/favorites" element={<Favorites/>}/>
       </Routes>
     </div>

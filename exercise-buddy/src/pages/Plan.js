@@ -10,7 +10,6 @@ import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, set
 
 const Plan = props => {
   const user=JSON.parse(localStorage.getItem("user"))
-  console.log(user)
     const navigate=useNavigate();
     const dispatch=useDispatch();
     useEffect(()=>{
@@ -38,7 +37,6 @@ const Plan = props => {
     }, [])
 
     const state=useSelector(state=>state.user);
-    console.log(state)
     return(
         <Box>
           <HamburgerMenu/>
