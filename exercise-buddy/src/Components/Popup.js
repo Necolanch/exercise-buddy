@@ -20,7 +20,6 @@ const style = {
   }
 
 const PopUp = (props) => {
-  const user=JSON.parse(localStorage.getItem("user"));
   const state=useSelector(state=>state.exercise);
   const dispatch=useDispatch();
   const handleSetsChange=(e)=>{
@@ -29,12 +28,6 @@ const PopUp = (props) => {
   const handleRepsChange=(e)=>{
     dispatch(setReps(parseInt(e.target.value)))
   }
-  const addExercise=()=>{
-    console.log(state);
-    userService.addExercise({day:state.day, ...state.exercise, sets:state.sets, reps:state.reps}, user.id)
-    .then(response=>console.log(response))
-    .catch(err=>console.log(err))
-  }
     return(
         <Modal open={props.open} onClose={props.handleClose}>
           <Box sx={{style}}>
@@ -42,10 +35,31 @@ const PopUp = (props) => {
             <DropDown/>
             <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
             <NumberInput action={handleRepsChange} number={state.sets} label="Reps"/>
-            <ActionButton action={addExercise} variant="contained" text={props.method}/>
+            <ActionButton action={props.action} variant="contained" text={props.method}/>
           </Box>
         </Modal>
     )
 }
 
-export default PopUp;
+const EditPopUp=props=>{
+  const state=useSelector(state=>state.exercise);
+  const dispatch=useDispatch();
+  const handleSetsChange=(e)=>{
+    dispatch(setSets(parseInt(e.target.value)))
+  }
+  const handleRepsChange=(e)=>{
+    dispatch(setReps(parseInt(e.target.value)))
+  }
+  return(
+    <Modal open={props.open} onClose={props.handleClose}>
+          <Box sx={{style}}>
+            <Typography sx={{color:"white"}} variant="h4" component="h3">{props.method} {state.exercise.name}</Typography>
+            <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
+            <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
+            <ActionButton action={props.action} variant="contained" text={props.method}/>
+          </Box>
+        </Modal>
+  )
+}
+
+export {PopUp, EditPopUp};

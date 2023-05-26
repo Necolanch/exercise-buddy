@@ -52,9 +52,28 @@ const addToPlan=async(req,res)=>{
         .catch(err=>res.status(500).json(err))
 }
 
+const updatePlan=async(req,res)=>{
+    const user=await User.findOne({where:{id:req.params.id}});
+    const day=req.body.exercise.day;
+    const filtered=user.dataValues[day].filter(exercise=>exercise.name!==req.body.exercise.name);
+    await User.update({[day]:[...filtered, {
+        name:req.body.exercise.name,
+        type:req.body.exercise.type,
+        muscle:req.body.exercise.muscle,
+        equipment:req.body.exercise.equipment,
+        difficulty:req.body.exercise.difficulty,
+        instructions:req.body.exercise.instructions,
+        sets:req.body.exercise.sets,
+        reps:req.body.exercise.reps
+    }]},
+        {where:{id:req.params.id}})
+        .then(response=>res.status(200).json(response))
+        .catch(err=>res.status(500).json(err))
+}
+
 const removeFromPlan=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
-    const day=req.body.day;
+    const day=req.body.exercise.day;
     const removed=await User.update({[day]:user.dataValues[day].filter(exercise=>exercise.name!==req.body.name)},
     {where:{id:req.params.id}})
     .then(response=>res.status(200).json(response))
@@ -87,4 +106,4 @@ const removeFavorites=async(req,res)=>{
         .catch(err=>res.status(500).json(err))
 }
 
-module.exports={find, update, remove, addToPlan, removeFromPlan, addToFavorites, removeFavorites}
+module.exports={find, update, remove, addToPlan, updatePlan, removeFromPlan, addToFavorites, removeFavorites}

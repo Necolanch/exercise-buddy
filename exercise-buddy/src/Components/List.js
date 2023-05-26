@@ -14,7 +14,7 @@ import { Divider, Link, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setExercise } from "../features/exercise/exerciseSlice";
+import { setExercise, setDay } from "../features/exercise/exerciseSlice";
 
 const theme=createTheme({
     components:{
@@ -63,6 +63,10 @@ const AddList = (props) =>{
 
 const DayList = props => {
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
     return (
         <ThemeProvider theme={theme}>
         <List sx={{display:"flex", flexDirection:"column", width:"20vw", marginLeft:"2em", marginTop:"1em"}}>
@@ -70,57 +74,24 @@ const DayList = props => {
           <Typography sx={{color:"white"}} variant="h6" component="h4">Edit Plan</Typography>
           <Link href="http://localhost:3000/favorites">View Favorites</Link>
           </Box>
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
+            {
+              props.day.map(exercise=>{
+                return(
+                  <ListItem onClick={()=>selectExercise(exercise)} sx={{marginY:"1em"}} secondaryAction={
                     <IconButton edge="end" aria-label="delete">
                       <RemoveIcon/>
                     </IconButton>}>
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
+              <ListItemText primary={exercise.name} secondary={`Sets:${exercise.sets} Reps:${exercise.reps}`}/>
+              <IconButton onClick={props.action} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
+                )
+              })
+            }
         </List>
         </ThemeProvider>
 )}
@@ -128,8 +99,14 @@ const DayList = props => {
 const PlanList = (props) =>{
   const navigate=useNavigate();
   const dispatch=useDispatch();
+
   const selectExercise=(workout)=>{
     dispatch(setExercise(workout))
+  }
+
+  const editDay=(day)=>{
+    dispatch(setDay(day));
+    navigate("/edit")
   }
     return (
         <ThemeProvider theme={theme}>
@@ -138,8 +115,8 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Sunday</h3>
-            <IconButton aria-label="edit">
-              <EditIcon/>
+            <IconButton onClick={()=>editDay("Sunday")} aria-label="edit">
+              <EditIcon />
             </IconButton>
             </Box>
             
@@ -164,7 +141,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Monday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Monday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
@@ -190,7 +167,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Tuesday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Tuesday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
@@ -216,7 +193,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Wednesday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Wednesday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
@@ -242,7 +219,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Thursday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Thursday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
@@ -268,7 +245,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Friday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Friday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
@@ -294,7 +271,7 @@ const PlanList = (props) =>{
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
             <h3>Saturday</h3>
-            <IconButton aria-label="edit">
+            <IconButton onClick={()=>editDay("Saturday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>

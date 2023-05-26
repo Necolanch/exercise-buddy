@@ -6,6 +6,12 @@ const addExercise=(exercise, id)=>{
         .catch(err=>err)
 }
 
-const userService={addExercise};
+const editExercise=(exercise,id)=>{
+    return axios.post(`http://localhost:3030/user/${id}/editplan`,{exercise:exercise},{withCredentials:true})
+    .then(response=>console.log(response))
+    .catch(err=>err)
+}
+
+const userService={addExercise, editExercise};
 
 export default userService;

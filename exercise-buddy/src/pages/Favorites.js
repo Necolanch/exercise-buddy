@@ -4,7 +4,7 @@ import authService from "../services/auth.service";
 import { Box, Divider, Typography } from "@mui/material";
 import HamburgerMenu from "../Components/HamburgerMenu";
 import {DifficultyFilter} from "../Components/Filter";
-import PopUp from "../Components/Popup";
+import {PopUp} from "../Components/Popup";
 import { AddList } from "../Components/List";
 
 const Favorites = props => {
