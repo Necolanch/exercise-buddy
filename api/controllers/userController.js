@@ -74,7 +74,10 @@ const updatePlan=async(req,res)=>{
 const removeFromPlan=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
     const day=req.body.exercise.day;
-    const removed=await User.update({[day]:user.dataValues[day].filter(exercise=>exercise.name!==req.body.name)},
+    console.log(day);
+    console.log(user);
+    const filtered=user.dataValues[day].filter(exercise=>exercise.name!==req.body.exercise.name);
+    const removed=await User.update({[day]:filtered},
     {where:{id:req.params.id}})
     .then(response=>res.status(200).json(response))
     .catch(err=>res.status(500).json(err))

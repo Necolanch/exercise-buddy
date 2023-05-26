@@ -15,6 +15,7 @@ import { Divider, Link, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setExercise, setDay } from "../features/exercise/exerciseSlice";
+import userService from '../services/user.service';
 
 const theme=createTheme({
     components:{
@@ -64,8 +65,15 @@ const AddList = (props) =>{
 const DayList = props => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  const exerciseState=useSelector(state=>state.exercise);
+  const userState=useSelector(state=>state.user);
   const selectExercise=(workout)=>{
     dispatch(setExercise(workout))
+  }
+  const deleteExercise=(workout)=>{
+    userService.removeExercise(workout,userState.id)
+    .then(response=>console.log(response))
+    .catch(err=>console.log(err))
   }
     return (
         <ThemeProvider theme={theme}>
@@ -78,7 +86,7 @@ const DayList = props => {
               props.day.map(exercise=>{
                 return(
                   <ListItem onClick={()=>selectExercise(exercise)} sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton onClick={()=>deleteExercise({day:exerciseState.day, ...exerciseState.exercise})} edge="end" aria-label="delete">
                       <RemoveIcon/>
                     </IconButton>}>
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
