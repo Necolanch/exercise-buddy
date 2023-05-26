@@ -11,32 +11,12 @@ import Favorites from './pages/Favorites';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
-import authService from './services/auth.service';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday} from "./features/user/userSlice";
+
+import { useSelector } from "react-redux";
+
 
 function App() {
-  const user=JSON.parse(localStorage.getItem("user"));
-  const dispatch=useDispatch();
-  useEffect(()=>{
-authService.getUser(user.id)
-        .then(data=>{
-            dispatch(setUsername(data.username));
-            dispatch(setId(data.id));
-            dispatch(setSunday(data.Sunday));
-            dispatch(setMonday(data.Monday));
-            dispatch(setTuesday(data.Tuesday));
-            dispatch(setWednesday(data.Wednesday));
-            dispatch(setThursday(data.Thursday));
-            dispatch(setFriday(data.Friday));
-            dispatch(setSaturday(data.Saturday));
-            dispatch(setFavorites(data.favorites));
-        })
-        .catch(err=>console.log(err))
-  },[])
   const filterState = useSelector(state=>state.filter);
-  const userState=useSelector(state=>state.user);
   return (
     <div>
       <Routes>
