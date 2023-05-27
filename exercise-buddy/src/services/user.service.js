@@ -24,6 +24,12 @@ const addFavorite=(exercise,id)=>{
     .catch(err=>err)
 }
 
-const userService={addExercise, editExercise, removeExercise, addFavorite};
+const removeFavorite=(exercise,id)=>{
+    return axios.patch(`http://localhost:3030/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
+    .then(response=>response)
+    .catch(err=>err)
+}
+
+const userService={addExercise, editExercise, removeExercise, addFavorite, removeFavorite};
 
 export default userService;

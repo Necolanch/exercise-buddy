@@ -103,7 +103,8 @@ const addToFavorites=async(req,res)=>{
 
 const removeFavorites=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
-    const updated=await User.update({favorites:user.dataValues.favorites.filter(exercise=>exercise.name!==req.body.name)},
+    const filtered=user.dataValues.favorites.filter(exercise=>exercise.name!==req.body.exercise.name)
+    const updated=await User.update({favorites:filtered},
         {where:{id:req.params.id}})
         .then(response=>res.status(200).json(response))
         .catch(err=>res.status(500).json(err))
