@@ -10,6 +10,7 @@ import EditPlan from './pages/EditPlan';
 import Favorites from './pages/Favorites';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Settings from './pages/Settings';
 
 
 import { useSelector } from "react-redux";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/plan" element={<Plan/>}/>
         <Route path="/edit" element={<EditPlan filterState={filterState}/>}/>
         <Route path="/favorites" element={<Favorites/>}/>
+        <Route path="/settings" element={<Settings/>}/>
       </Routes>
     </div>
   );
