@@ -89,12 +89,12 @@ const removeFromPlan=async(req,res)=>{
 const addToFavorites=async(req,res)=>{
     const user=await User.findOne({where:{id:req.params.id}});
     const updated=await User.update({favorites:[...user.dataValues.favorites, {
-        name:req.body.name,
-        type:req.body.type,
-        muscle:req.body.muscle,
-        equipment:req.body.equipment,
-        difficulty:req.body.difficulty,
-        instructions:req.body.instructions
+        name:req.body.exercise.name,
+        type:req.body.exercise.type,
+        muscle:req.body.exercise.muscle,
+        equipment:req.body.exercise.equipment,
+        difficulty:req.body.exercise.difficulty,
+        instructions:req.body.exercise.instructions
     }]},
         {where:{id:req.params.id}})
         .then(response=>res.status(200).json(response))
