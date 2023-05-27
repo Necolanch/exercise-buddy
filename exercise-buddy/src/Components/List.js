@@ -62,6 +62,52 @@ const AddList = (props) =>{
     )
 }
 
+const FavoritesList = (props) =>{
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const exerciseState=useSelector(state=>state.exercise);
+  const userState=useSelector(state=>state.user);
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
+
+  const removeFromFavorites=(workout)=>{
+    userService.removeFavorite(workout, userState.id)
+    .then(response=>{
+      console.log(response);
+    })
+    .catch(err=>console.log(err))
+  }
+    return (
+        <ThemeProvider theme={theme}>
+        <List>
+        <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
+          {
+            props.exercises.map(exercise=>{
+              return(
+                <Grid item xs={4} sm={5}>
+            <ListItem onClick={()=>selectExercise(exercise)} secondaryAction={
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
+                      <AddIcon/>
+                    </IconButton>}>
+              <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={exercise.name} secondary={`Difficulty: ${exercise.difficulty} Muscle: ${exercise.muscle}`}/>
+              <IconButton onClick={()=>removeFromFavorites(exercise)}>
+                <RemoveIcon/>
+              </IconButton>
+            </ListItem>
+            </Grid>
+              )
+            })
+          }
+        </Grid>
+        </List>
+        </ThemeProvider>
+    )
+}
+
 const DayList = props => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -495,4 +541,4 @@ DashboardList.defaultProps={
   targetedMuscle:"Triceps"
 }
 
-export {AddList, PlanList, DashboardList, DayList}
+export {AddList, PlanList, DashboardList, DayList, FavoritesList}
