@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setFavorites } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import { Box, Divider, Typography } from "@mui/material";
@@ -10,13 +12,14 @@ import { AddList } from "../Components/List";
 const Favorites = props => {
     const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
+    const dispatch=useDispatch();
     useEffect(()=>{
         if (!user) {
             navigate("/")
         }else{
         authService.getUser(user.id)
         .then(data=>{
-            console.log(data);
+            dispatch(setFavorites(data.favorites));
             if (data.response.status===401) {
                 navigate("/")
             }
@@ -26,6 +29,7 @@ const Favorites = props => {
 
     }, [])
     const [open, setOpen]=useState(false);
+    const state=useSelector(state=>state.user);
 
     const handleOpen=()=>{
         setOpen(true)
@@ -54,7 +58,6 @@ const Favorites = props => {
             </Box>
 
             <Box sx={{marginLeft:"5em"}}>
-            <AddList handleOpen={handleOpen}/>
             </Box>
             <PopUp open={open} handleClose={handleClose}/>
         </Box>

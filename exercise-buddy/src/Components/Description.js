@@ -1,28 +1,38 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { PropTypes } from "prop-types";
 import { IconButton } from '@mui/material';
 import {useSelector} from "react-redux";
+import userService from '../services/user.service';
 
 const Description = props => {
-    const state=useSelector(state=>state.exercise);
-    console.log(state);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const [favorite, setFavorite]=useState(false);
+    const exerciseState=useSelector(state=>state.exercise);
+    console.log(exerciseState);
+    const addToFavorites=()=>{
+        userService.addFavorite({...exerciseState.exercise}, user.id)
+        .then(response=>console.log(response))
+        .catch(err=>console.log(err))
+    }
     return(
         <Box sx={{width:"70vw", display:"flex", flexDirection:"column", alignItems:"center", margin:"0 auto"}}>
             <Box sx={{display:"flex", alignItems:"center"}}>
-            <Typography variant="h4" component="h3" sx={{fontWeight:600, color:"#7BEA9C"}}>{state.exercise.name}</Typography>
-            <IconButton sx={{marginLeft:"1em"}}>
-            <FavoriteBorderIcon/>
+            <Typography variant="h4" component="h3" sx={{fontWeight:600, color:"#7BEA9C"}}>{exerciseState.exercise.name}</Typography>
+            <IconButton onClick={addToFavorites} sx={{marginLeft:"1em"}}>
+                {favorite ? <Favorite/> : <FavoriteBorderIcon/>}
             </IconButton>
             </Box>
             <Box sx={{width:"70%", display:"flex", justifyContent:"space-evenly", marginTop:"1em", color:"white"}}>
-                <Typography>Difficulty: {state.exercise.difficulty}</Typography>
-                <Typography>Muscle group: {state.exercise.muscle}</Typography>
-                <Typography>Equipment: {state.exercise.equipment}</Typography>
-                <Typography>Exercise type: {state.exercise.type}</Typography>
+                <Typography>Difficulty: {exerciseState.exercise.difficulty}</Typography>
+                <Typography>Muscle group: {exerciseState.exercise.muscle}</Typography>
+                <Typography>Equipment: {exerciseState.exercise.equipment}</Typography>
+                <Typography>Exercise type: {exerciseState.exercise.type}</Typography>
             </Box>
-            <Typography sx={{marginTop:"2em", color:"white"}} variant="body1" component="p">{state.exercise.instructions}</Typography>
+            <Typography sx={{marginTop:"2em", color:"white"}} variant="body1" component="p">{exerciseState.exercise.instructions}</Typography>
         </Box>
     )
 }

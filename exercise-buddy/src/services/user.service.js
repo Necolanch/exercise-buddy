@@ -18,6 +18,12 @@ const removeExercise=(exercise,id)=>{
     .catch(err=>err)
 }
 
-const userService={addExercise, editExercise, removeExercise};
+const addFavorite=(exercise,id)=>{
+    return axios.post(`http://localhost:3030/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
+    .then(response=>response)
+    .catch(err=>err)
+}
+
+const userService={addExercise, editExercise, removeExercise, addFavorite};
 
 export default userService;
