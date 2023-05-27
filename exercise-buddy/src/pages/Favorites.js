@@ -30,6 +30,7 @@ const Favorites = props => {
     }, [])
     const [open, setOpen]=useState(false);
     const state=useSelector(state=>state.user);
+    console.log(state);
 
     const handleOpen=()=>{
         setOpen(true)
@@ -58,6 +59,7 @@ const Favorites = props => {
             </Box>
 
             <Box sx={{marginLeft:"5em"}}>
+            <AddList exercises={state.favorites} handleOpen={handleOpen}/>
             </Box>
             <PopUp open={open} handleClose={handleClose}/>
         </Box>
