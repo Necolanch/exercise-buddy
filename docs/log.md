@@ -87,3 +87,13 @@ align with my desired tech stack.
 🏆 Accomplishments - I learned Redux Toolkit.
 <br>
 🔮 Next Steps - I plan to finish connecting the frontend and testing it.
+
+### Week 4 Project Portfolio 5
+
+⚙️ Overview - This week I finished the rest of the functionality needed for the project.
+<br>
+🌵 Challenges - I was trying to make code as DRY as possible but it was tough trying to balance that worry with trying to just get the functionality working as needed.
+<br>
+🏆 Accomplishments - I finished the necessary functionality.
+<br>
+🔮 Next Steps - I need to add a view and functionality for changing the username and/or password.
