@@ -9,6 +9,7 @@ router.delete("/:id/delete", authenticate, userControl.remove);
 
 router.patch("/:id/plan", authenticate, userControl.removeFromPlan);
 router.post("/:id/plan", authenticate, userControl.addToPlan);
+router.post("/:id/editplan", authenticate, userControl.updatePlan);
 
 router.patch("/:id/favorites", authenticate, userControl.removeFavorites);
 router.post("/:id/favorites", authenticate, userControl.addToFavorites);

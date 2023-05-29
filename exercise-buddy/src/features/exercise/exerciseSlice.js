@@ -15,7 +15,7 @@ const initialState={
 }
 
 export const exerciseSlice=createSlice({
-    name:"filter",
+    name:"exercise",
     initialState,
     reducers:{
         setExercise:(state,action)=>{

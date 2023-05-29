@@ -13,8 +13,9 @@ import { PropTypes } from "prop-types";
 import { Divider, Link, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setExercise } from "../features/exercise/exerciseSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { setExercise, setDay } from "../features/exercise/exerciseSlice";
+import userService from '../services/user.service';
 
 const theme=createTheme({
     components:{
@@ -61,8 +62,65 @@ const AddList = (props) =>{
     )
 }
 
+const FavoritesList = (props) =>{
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const exerciseState=useSelector(state=>state.exercise);
+  const userState=useSelector(state=>state.user);
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
+
+  const removeFromFavorites=(workout)=>{
+    userService.removeFavorite(workout, userState.id)
+    .then(response=>{
+      console.log(response);
+    })
+    .catch(err=>console.log(err))
+  }
+    return (
+        <ThemeProvider theme={theme}>
+        <List>
+        <Grid container spacing={2} rowSpacing={2} sx={{width:"50vw"}}>
+          {
+            props.exercises.map(exercise=>{
+              return(
+                <Grid item xs={4} sm={5}>
+            <ListItem onClick={()=>selectExercise(exercise)} secondaryAction={
+                    <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
+                      <AddIcon/>
+                    </IconButton>}>
+              <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
+                <VisibilityIcon/>
+              </IconButton>
+              <ListItemText primary={exercise.name} secondary={`Difficulty: ${exercise.difficulty} Muscle: ${exercise.muscle}`}/>
+              <IconButton onClick={()=>removeFromFavorites(exercise)}>
+                <RemoveIcon/>
+              </IconButton>
+            </ListItem>
+            </Grid>
+              )
+            })
+          }
+        </Grid>
+        </List>
+        </ThemeProvider>
+    )
+}
+
 const DayList = props => {
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const exerciseState=useSelector(state=>state.exercise);
+  const userState=useSelector(state=>state.user);
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
+  const deleteExercise=(workout)=>{
+    userService.removeExercise(workout,userState.id)
+    .then(response=>console.log(response))
+    .catch(err=>console.log(err))
+  }
     return (
         <ThemeProvider theme={theme}>
         <List sx={{display:"flex", flexDirection:"column", width:"20vw", marginLeft:"2em", marginTop:"1em"}}>
@@ -70,394 +128,223 @@ const DayList = props => {
           <Typography sx={{color:"white"}} variant="h6" component="h4">Edit Plan</Typography>
           <Link href="http://localhost:3000/favorites">View Favorites</Link>
           </Box>
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
+            {
+              props.day.map(exercise=>{
+                return(
+                  <ListItem onClick={()=>selectExercise(exercise)} sx={{marginY:"1em"}} secondaryAction={
+                    <IconButton onClick={()=>deleteExercise({day:exerciseState.day, ...exerciseState.exercise})} edge="end" aria-label="delete">
                       <RemoveIcon/>
                     </IconButton>}>
               <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
+              <ListItemText primary={exercise.name} secondary={`Sets:${exercise.sets} Reps:${exercise.reps}`}/>
+              <IconButton onClick={props.action} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
-
-            <ListItem sx={{marginY:"1em"}} secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <RemoveIcon/>
-                    </IconButton>}>
-                    <IconButton sx={{marginRight:".5em"}} onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets:${props.sets} Reps:${props.reps}`}/>
-              <IconButton aria-label="edit">
-              <EditIcon/>
-            </IconButton>
-            </ListItem>
+                )
+              })
+            }
         </List>
         </ThemeProvider>
 )}
 
 const PlanList = (props) =>{
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+
+  const selectExercise=(workout)=>{
+    dispatch(setExercise(workout))
+  }
+
+  const editDay=(day)=>{
+    dispatch(setDay(day));
+    navigate("/edit")
+  }
     return (
         <ThemeProvider theme={theme}>
         <List>
         <Grid container spacing={2} rowSpacing={2} sx={{width:"100vw"}}>
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
-              <EditIcon/>
+            <h3>Sunday</h3>
+            <IconButton onClick={()=>editDay("Sunday")} aria-label="edit">
+              <EditIcon />
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-              
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Sunday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Monday</h3>
+            <IconButton onClick={()=>editDay("Monday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Monday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Tuesday</h3>
+            <IconButton onClick={()=>editDay("Tuesday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Tuesday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Wednesday</h3>
+            <IconButton onClick={()=>editDay("Wednesday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Wednesday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Thursday</h3>
+            <IconButton onClick={()=>editDay("Thursday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Thursday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Friday</h3>
+            <IconButton onClick={()=>editDay("Friday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Friday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
 
             <Grid item xs={12}>
             <Box style={{display:"flex"}}>
-            <h3>{props.day}</h3>
-            <IconButton aria-label="edit">
+            <h3>Saturday</h3>
+            <IconButton onClick={()=>editDay("Saturday")} aria-label="edit">
               <EditIcon/>
             </IconButton>
             </Box>
             
             <Box sx={{width:"100vw", display:"flex", justifyContent:"space-evenly"}}>
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
+            {
+              props.state.Saturday.map(exercise=>{
+                return(
+                  <Box sx={{width:"20vw"}}>
+            <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
               </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
+              <ListItemText primary={exercise.name} secondary={`Sets: ${exercise.sets} Reps: ${exercise.reps}`}/>
             </ListItem>
             </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
-
-            <Box sx={{width:"20vw"}}>
-            <ListItem>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
-              <ListItemText primary={props.name} secondary={`Sets: ${props.sets} Reps: ${props.reps}`}/>
-            </ListItem>
-            </Box>
+                )
+              })
+            }
             </Box>
             </Grid>
         </Grid>
@@ -654,4 +541,4 @@ DashboardList.defaultProps={
   targetedMuscle:"Triceps"
 }
 
-export {AddList, PlanList, DashboardList, DayList}
+export {AddList, PlanList, DashboardList, DayList, FavoritesList}
