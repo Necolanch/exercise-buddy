@@ -74,7 +74,7 @@ const Search = props => {
             
             <Box sx={{width:"100vw", display:"flex", alignItems:"center", marginY:"2em"}}>
             <SearchInput/>
-            <MainButton variant="contained"/>
+            <MainButton action={applyFilters} variant="contained"/>
 
             <Box sx={{display:"flex", flexDirection:"column", marginLeft:"25em"}}>
             <Typography sx={{color:"white"}}>Filter</Typography>
