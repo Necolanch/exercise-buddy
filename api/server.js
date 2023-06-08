@@ -31,12 +31,23 @@ app.use((req, res, next) => {
     next();
   });
 
-const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
+if (process.env.NODE_ENV === "production ") {
+  const sequelize = new Sequelize(process.env.DATABASE_URL);
+try {
+    sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+} else {
+  const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
     sequelize.authenticate();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+}
 }
 
 app.use("/auth", authRouter);
