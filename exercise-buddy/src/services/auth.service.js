@@ -1,6 +1,6 @@
 import axios from "axios";
-const API_BASE=process.env.NODE_ENV==="development"
-  ? "http://localhost:3030/" : process.env.REACT_APP_BASE_URL
+const API_BASE=process.env.NODE_ENV==="production"
+  ? process.env.REACT_APP_BASE_URL : "http://localhost:3030/" 
 
 const signup=(username, password, confirm)=>{
     if (password!==confirm) {
