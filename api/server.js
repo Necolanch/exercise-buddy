@@ -32,11 +32,17 @@ app.use((req, res, next) => {
     next();
   });
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+//const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 if (process.env.NODE_ENV === "production") {
   console.log("here");
-  const sequelize = new Sequelize(process.env.DATABASE_URL);
+  const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
+    host:"aws.connect.psdb.cloud",
+    dialect:"mysql",
+    dialectOptions:{
+      ssl:{}
+    }
+  });
 try {
     sequelize.authenticate();
     console.log("here")
