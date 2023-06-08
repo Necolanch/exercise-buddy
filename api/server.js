@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 const { Sequelize } = require('sequelize');
+const mysql=require("mysql2");
 const cookieParser=require("cookie-parser");
 const config=require("./config/config.json");
 const authRouter=require("./routes/authRoutes");
@@ -31,12 +32,14 @@ app.use((req, res, next) => {
     next();
   });
 
-if (process.env.NODE_ENV === "production ") {
+const connection = mysql.createConnection(process.env.DATABASE_URL);
+
+if (process.env.NODE_ENV === "production") {
+  console.log("here");
   const sequelize = new Sequelize(process.env.DATABASE_URL);
 try {
     sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-
+    console.log("here")
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
@@ -44,7 +47,7 @@ try {
   const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
     sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log("HERE")
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
