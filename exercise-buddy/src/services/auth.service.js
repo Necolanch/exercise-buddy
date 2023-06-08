@@ -1,28 +1,31 @@
 import axios from "axios";
+const API_BASE=process.env.NODE_ENV==="development"
+  ? "http://localhost:3030/" : process.env.REACT_APP_BASE_URL
+
 const signup=(username, password, confirm)=>{
     if (password!==confirm) {
         console.log("passwords do not match")
         throw Error("Passwords do not match");
     } else{
-        return axios.post(`http://localhost:3030/auth/create`, {username:username,password:password}, {withCredentials:true})
+        return axios.post(`${API_BASE}/auth/create`, {username:username,password:password}, {withCredentials:true})
                 .then(response=>response.data)
                 .catch(err=>console.log(err))
     }
 }
 
 const login=(username,password)=>{
-    return axios.post("http://localhost:3030/auth/login", {username:username, password:password}, {withCredentials:true})
+    return axios.post(`${API_BASE}/auth/login`, {username:username, password:password}, {withCredentials:true})
             .then(response=>response.data)
             .catch(err=>console.log(err))
 }
 
-const logout=()=>{return axios.post("http://localhost:3030/auth/logout",{},{withCredentials:true})
+const logout=()=>{return axios.post(`${API_BASE}/auth/logout`,{},{withCredentials:true})
                          .then(()=>{localStorage.removeItem("user")})
                          .catch(err=>err)
 }
 
 const getUser=(id)=>{
-    return axios.get(`http://localhost:3030/user/${id}`, {withCredentials:true})
+    return axios.get(`${API_BASE}/user/${id}`, {withCredentials:true})
             .then(response=>response.data)
             .catch(err=>err)
 }

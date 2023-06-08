@@ -1,31 +1,34 @@
 import axios from "axios";
 
+const API_BASE=process.env.NODE_ENV==="development"
+  ? "http://localhost:3030/" : process.env.REACT_APP_BASE_URL
+
 const addExercise=(exercise, id)=>{
-    return axios.post(`http://localhost:3030/user/${id}/plan`,{exercise:exercise},{withCredentials:true})
+    return axios.post(`${API_BASE}/user/${id}/plan`,{exercise:exercise},{withCredentials:true})
         .then(response=>response)
         .catch(err=>err)
 }
 
 const editExercise=(exercise,id)=>{
-    return axios.post(`http://localhost:3030/user/${id}/editplan`,{exercise:exercise},{withCredentials:true})
+    return axios.post(`${API_BASE}/user/${id}/editplan`,{exercise:exercise},{withCredentials:true})
     .then(response=>response)
     .catch(err=>err)
 }
 
 const removeExercise=(exercise,id)=>{
-    return axios.patch(`http://localhost:3030/user/${id}/plan`, {exercise:exercise}, {withCredentials:true})
+    return axios.patch(`${API_BASE}/user/${id}/plan`, {exercise:exercise}, {withCredentials:true})
     .then(response=>response)
     .catch(err=>err)
 }
 
 const addFavorite=(exercise,id)=>{
-    return axios.post(`http://localhost:3030/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
+    return axios.post(`${API_BASE}/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
     .then(response=>response)
     .catch(err=>err)
 }
 
 const removeFavorite=(exercise,id)=>{
-    return axios.patch(`http://localhost:3030/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
+    return axios.patch(`${API_BASE}/user/${id}/favorites`, {exercise:exercise}, {withCredentials:true})
     .then(response=>response)
     .catch(err=>err)
 }
