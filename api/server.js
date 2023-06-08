@@ -58,6 +58,6 @@ app.use("/user", userRouter);
 
     app.get('/*', (req,res) => res.sendFile(path.join(__dirname, '../exercise-buddy/build','index.html')));
 
-app.listen(process.env.port || 3030, ()=>{
+app.listen(process.env.PORT || 3030, ()=>{
     console.log(`Server running on port ${process.env.port}`)
 })
