@@ -40,10 +40,13 @@ if (process.env.NODE_ENV === "production") {
     host:"aws.connect.psdb.cloud",
     dialect:"mysql",
     dialectOptions:{
-      ssl:{}
+      ssl:{
+        rejectUnauthorized:true
+      }
     }
   });
 try {
+  console.log("here");
     sequelize.authenticate();
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -51,6 +54,7 @@ try {
 } else {
   const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
+  console.log("HERE")
     sequelize.authenticate();
   } catch (error) {
     console.error('Unable to connect to the database:', error);
