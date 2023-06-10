@@ -30,7 +30,7 @@ const create=async(req,res)=>{
                 secret
             );
     
-            res.cookie("token", token, secret, {httpOnly:true}).json({user:{
+            res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-stage.onrender.com"}).json({user:{
                 id:response.dataValues.id,
                 username:response.dataValues.username,
                 favorites: response.dataValues.favorites,
@@ -69,7 +69,7 @@ const login = async(req,res)=>{
     }
 
     const token=jwt.sign({id:user.dataValues.id}, secret)
-    res.cookie("token", token, secret, {httpOnly:true}).json({message:"Logged in",user:{
+    res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-stage.onrender.com"}).json({message:"Logged in",user:{
         id:user.dataValues.id,
         username:user.dataValues.username,
         favorites: user.dataValues.favorites,

@@ -36,7 +36,6 @@ app.use((req, res, next) => {
 
 
 if (process.env.NODE_ENV === "production") {
-  console.log("here");
   const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
     host:"aws.connect.psdb.cloud",
     dialect:"mysql",
@@ -46,7 +45,6 @@ if (process.env.NODE_ENV === "production") {
   });
 try {
     sequelize.authenticate();
-    console.log("here")
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
@@ -54,7 +52,6 @@ try {
   const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
 try {
     sequelize.authenticate();
-    console.log("HERE")
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
@@ -69,5 +66,5 @@ app.use("/user", userRouter);
     app.get('/*', (req,res) => res.sendFile(path.join(__dirname, '../exercise-buddy/build','index.html')));
 
 app.listen(process.env.PORT || 3030, ()=>{
-    console.log(`Server running on port ${process.env.port}`)
+    console.log(`Server running on port ${process.env.PORT}`)
 })
