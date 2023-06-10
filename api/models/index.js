@@ -8,6 +8,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+require("dotenv").config();
 
 let sequelize;
 if (config.use_env_variable) {
@@ -17,7 +18,9 @@ if (config.use_env_variable) {
     host:"aws.connect.psdb.cloud",
     dialect:"mysql",
     dialectOptions:{
-      ssl:{}
+      ssl:{
+        rejectUnauthorized:true
+      }
     }
   });
   console.log('Connection has been established successfully.');
