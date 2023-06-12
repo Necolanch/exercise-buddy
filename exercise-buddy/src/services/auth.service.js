@@ -1,6 +1,5 @@
 import axios from "axios";
-const API_BASE=process.env.NODE_ENV==="production"
-  ? process.env.REACT_APP_BASE_URL : "http://localhost:3030/" 
+const API_BASE=process.env.NODE_ENV==="production" ? process.env.REACT_APP_BASE_URL : "http://localhost:3030" 
 
 const signup=(username, password, confirm)=>{
     if (password!==confirm) {
@@ -19,7 +18,9 @@ const login=(username,password)=>{
             .catch(err=>console.log(err))
 }
 
-const logout=()=>{return axios.post(`${API_BASE}/auth/logout`,{},{withCredentials:true})
+const logout=()=>{
+    console.log("here")
+    return axios.post(`${API_BASE}/auth/logout`,{},{withCredentials:true})
                          .then(()=>{localStorage.removeItem("user")})
                          .catch(err=>err)
 }
