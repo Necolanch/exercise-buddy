@@ -12,16 +12,22 @@ import {PopUp, EditPopUp} from "../Components/Popup";
 import {DifficultyFilter, MuscleFilter, TypeFilter} from "../Components/Filter";
 import { MainButton, ActionButton } from "../Components/Button";
 import { AddList } from "../Components/List";
+import { setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday } from '../features/user/userSlice';
 
 
 const EditPlan = props => {
     const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
+    const dispatch=useDispatch();
 
     const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.filterState.difficulty}&name=${props.filterState.name}&muscle=${props.filterState.muscle}&type=${props.filterState.type}`
     const [search, setSearch]=useState([]);
     const [open, setOpen]=useState(false);
     const [editOpen, setEditOpen]=useState(false);
+    const [edited, setEdited]=useState(false);
+    const [added, setAdded]=useState(false);
+    const exerciseState=useSelector(state=>state.exercise);
+    const userState=useSelector(state=>state.user);
     useEffect(()=>{
         if (!user) {
             navigate("/")
@@ -41,9 +47,7 @@ const EditPlan = props => {
         .catch(err=>console.log(err))
     }
 
-    }, [])
-    const exerciseState=useSelector(state=>state.exercise);
-    const userState=useSelector(state=>state.user);
+    }, [props])
 
     const handleOpen=()=>{
         setOpen(true)
@@ -51,13 +55,15 @@ const EditPlan = props => {
 
     const handleClose=()=>{
         setOpen(false);
+        setEdited(false)
     }
     const handleEditOpen=()=>{
-        setEditOpen(true)
+        setEditOpen(true);
     }
 
     const handleEditClose=()=>{
         setEditOpen(false);
+        setEdited(false);
     }
 
     const applyFilters=()=>{
@@ -70,13 +76,81 @@ const EditPlan = props => {
 
     const addExercise=()=>{
         userService.addExercise({day:exerciseState.day, ...exerciseState.exercise, sets:exerciseState.sets, reps:exerciseState.reps}, user.id)
-        .then(response=>console.log(response))
+        .then(response=>{
+            switch (exerciseState.day) {
+                case "Sunday":
+                  dispatch(setSunday(response.data))
+                  break;
+        
+                  case "Monday":
+                  dispatch(setMonday(response.data))
+                  break;
+        
+                  case "Tuesday":
+                  dispatch(setTuesday(response.data))
+                  break;
+        
+                  case "Wednesday":
+                  dispatch(setWednesday(response.data))
+                  break;
+        
+                  case "Thursday":
+                  dispatch(setThursday(response.data))
+                  break;
+        
+                  case "Friday":
+                  dispatch(setFriday(response.data))
+                  break;
+        
+                  case "Saturday":
+                  dispatch(setSaturday(response.data))
+                  break;
+              
+                default:
+                  break;
+              }
+            setAdded(true)
+        })
         .catch(err=>console.log(err))
       }
 
     const editExercise=()=>{
         userService.editExercise({day:exerciseState.day, ...exerciseState.exercise, sets:exerciseState.sets, reps:exerciseState.reps}, user.id)
-        .then(response=>console.log(response))
+        .then(response=>{
+            switch (exerciseState.day) {
+                case "Sunday":
+                  dispatch(setSunday(response.data))
+                  break;
+        
+                  case "Monday":
+                  dispatch(setMonday(response.data))
+                  break;
+        
+                  case "Tuesday":
+                  dispatch(setTuesday(response.data))
+                  break;
+        
+                  case "Wednesday":
+                  dispatch(setWednesday(response.data))
+                  break;
+        
+                  case "Thursday":
+                  dispatch(setThursday(response.data))
+                  break;
+        
+                  case "Friday":
+                  dispatch(setFriday(response.data))
+                  break;
+        
+                  case "Saturday":
+                  dispatch(setSaturday(response.data))
+                  break;
+              
+                default:
+                  break;
+              }
+              setEdited(true)
+        })
         .catch(err=>console.log(err))
     }
     return (
@@ -117,8 +191,8 @@ const EditPlan = props => {
             </Box>
           </Box>
 
-          <PopUp action={addExercise} method="Add" open={open} handleClose={handleClose}/>
-          <EditPopUp action={editExercise} method="Edit" open={editOpen} handleClose={handleEditClose}/>
+          <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
+          <EditPopUp edited={edited} confirmation="Successfully edited" action={editExercise} method="Edit" open={editOpen} handleClose={handleEditClose}/>
         </Box>
     )
 }

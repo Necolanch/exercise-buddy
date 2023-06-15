@@ -12,9 +12,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 import { Divider, Link, Typography } from '@mui/material';
 
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setExercise, setDay } from "../features/exercise/exerciseSlice";
+import { setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday } from '../features/user/userSlice';
 import userService from '../services/user.service';
 
 const theme=createTheme({
@@ -42,7 +44,7 @@ const AddList = (props) =>{
           {
             props.exercises.map(exercise=>{
               return(
-                <Grid item xs={4} sm={5}>
+                <Grid key={exercise.name} item xs={4} sm={5}>
             <ListItem onClick={()=>selectExercise(exercise)} secondaryAction={
                     <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
@@ -85,7 +87,7 @@ const FavoritesList = (props) =>{
           {
             props.exercises.map(exercise=>{
               return(
-                <Grid item xs={4} sm={5}>
+                <Grid key={exercise.name} item xs={4} sm={5}>
             <ListItem onClick={()=>selectExercise(exercise)} secondaryAction={
                     <IconButton onClick={props.handleOpen} edge="end" aria-label="add">
                       <AddIcon/>
@@ -118,7 +120,41 @@ const DayList = props => {
   }
   const deleteExercise=(workout)=>{
     userService.removeExercise(workout,userState.id)
-    .then(response=>console.log(response))
+    .then(response=>{
+      switch (exerciseState.day) {
+        case "Sunday":
+          dispatch(setSunday(response.data))
+          break;
+
+          case "Monday":
+          dispatch(setMonday(response.data))
+          break;
+
+          case "Tuesday":
+          dispatch(setTuesday(response.data))
+          break;
+
+          case "Wednesday":
+          dispatch(setWednesday(response.data))
+          break;
+
+          case "Thursday":
+          dispatch(setThursday(response.data))
+          break;
+
+          case "Friday":
+          dispatch(setFriday(response.data))
+          break;
+
+          case "Saturday":
+          dispatch(setSaturday(response.data))
+          break;
+      
+        default:
+          break;
+      }
+      console.log(response)
+    })
     .catch(err=>console.log(err))
   }
     return (
@@ -126,12 +162,12 @@ const DayList = props => {
         <List sx={{display:"flex", flexDirection:"column", width:"20vw", marginLeft:"2em", marginTop:"1em"}}>
           <Box sx={{width:"100%", display:"flex", alignItems:"center", justifyContent:"space-evenly"}}>
           <Typography sx={{color:"white"}} variant="h6" component="h4">Edit Plan</Typography>
-          <Link href="http://localhost:3000/favorites">View Favorites</Link>
+          <Link onClick={()=>navigate("/favorites")}>View Favorites</Link>
           </Box>
             {
               props.day.map(exercise=>{
                 return(
-                  <ListItem onClick={()=>selectExercise(exercise)} sx={{marginY:"1em"}} secondaryAction={
+                  <ListItem key={exercise.name} onClick={()=>selectExercise(exercise)} sx={{marginY:"1em"}} secondaryAction={
                     <IconButton onClick={()=>deleteExercise({day:exerciseState.day, ...exerciseState.exercise})} edge="end" aria-label="delete">
                       <RemoveIcon/>
                     </IconButton>}>
@@ -178,7 +214,7 @@ const PlanList = (props) =>{
             {
               props.state.Sunday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -204,7 +240,7 @@ const PlanList = (props) =>{
             {
               props.state.Monday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -230,7 +266,7 @@ const PlanList = (props) =>{
             {
               props.state.Tuesday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -256,7 +292,7 @@ const PlanList = (props) =>{
             {
               props.state.Wednesday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -282,7 +318,7 @@ const PlanList = (props) =>{
             {
               props.state.Thursday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -308,7 +344,7 @@ const PlanList = (props) =>{
             {
               props.state.Friday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -334,7 +370,7 @@ const PlanList = (props) =>{
             {
               props.state.Saturday.map(exercise=>{
                 return(
-                  <Box sx={{width:"20vw"}}>
+                  <Box key={exercise.name} sx={{width:"20vw"}}>
             <ListItem onClick={()=>selectExercise(exercise)}>
             <IconButton onClick={()=>navigate("/view")}>
                 <VisibilityIcon/>
@@ -354,7 +390,148 @@ const PlanList = (props) =>{
 }
 
 const DashboardList = (props) => {
-  const navigate=useNavigate();
+  const userState=useSelector(state=>state.user);
+
+  let exerciseCountSunday={}
+  const exerciseSunday = userState.Sunday.forEach(exercise=>{
+    if (exerciseCountSunday[exercise.muscle]>=1) {
+      return exerciseCountSunday[exercise.muscle]++;
+    } else{
+      return exerciseCountSunday[exercise.muscle]=1
+    }
+  });
+  
+  let mostTargetedSunday="";
+  let highestCountSunday=0;
+  for (const key in exerciseCountSunday) {
+    if (exerciseCountSunday[key]>highestCountSunday) {
+      
+      mostTargetedSunday=key;
+      highestCountSunday=exerciseCountSunday[key]
+      
+    }
+  }
+
+  let exerciseCountMonday={}
+  const exerciseMonday = userState.Monday.forEach(exercise=>{
+    if (exerciseCountMonday[exercise.muscle]>=1) {
+      return exerciseCountMonday[exercise.muscle]++;
+    } else{
+      return exerciseCountMonday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedMonday="";
+  let highestCountMonday=0;
+  for (const key in exerciseCountMonday) {
+    if (exerciseCountMonday[key]>highestCountMonday) {
+      
+      mostTargetedMonday=key;
+      highestCountMonday=exerciseCountMonday[key]
+      
+    }
+  }
+
+  let exerciseCountTuesday={}
+  const exerciseTuesday = userState.Tuesday.forEach(exercise=>{
+    if (exerciseCountTuesday[exercise.muscle]>=1) {
+      return exerciseCountTuesday[exercise.muscle]++;
+    } else{
+      return exerciseCountTuesday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedTuesday="";
+  let highestCountTuesday=0;
+  for (const key in exerciseCountTuesday) {
+    if (exerciseCountTuesday[key]>highestCountTuesday) {
+      
+      mostTargetedTuesday=key;
+      highestCountTuesday=exerciseCountTuesday[key]
+      
+    }
+  }
+
+  let exerciseCountWednesday={}
+  const exerciseWednesday = userState.Wednesday.forEach(exercise=>{
+    if (exerciseCountWednesday[exercise.muscle]>=1) {
+      return exerciseCountWednesday[exercise.muscle]++;
+    } else{
+      return exerciseCountWednesday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedWednesday="";
+  let highestCountWednesday=0;
+  for (const key in exerciseCountWednesday) {
+    if (exerciseCountWednesday[key]>highestCountWednesday) {
+      
+      mostTargetedWednesday=key;
+      highestCountWednesday=exerciseCountWednesday[key]
+      
+    }
+  }
+
+  let exerciseCountThursday={}
+  const exerciseThursday = userState.Thursday.forEach(exercise=>{
+    if (exerciseCountThursday[exercise.muscle]>=1) {
+      return exerciseCountThursday[exercise.muscle]++;
+    } else{
+      return exerciseCountThursday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedThursday="";
+  let highestCountThursday=0;
+  for (const key in exerciseCountThursday) {
+    if (exerciseCountThursday[key]>highestCountThursday) {
+      
+      mostTargetedThursday=key;
+      highestCountThursday=exerciseCountThursday[key]
+      
+    }
+  }
+
+  let exerciseCountFriday={}
+  const exerciseFriday = userState.Friday.forEach(exercise=>{
+    if (exerciseCountFriday[exercise.muscle]>=1) {
+      return exerciseCountFriday[exercise.muscle]++;
+    } else{
+      return exerciseCountFriday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedFriday="";
+  let highestCountFriday=0;
+  for (const key in exerciseCountFriday) {
+    if (exerciseCountFriday[key]>highestCountFriday) {
+      
+      mostTargetedFriday=key;
+      highestCountFriday=exerciseCountFriday[key]
+      
+    }
+  }
+
+  let exerciseCountSaturday={}
+  const exerciseSaturday = userState.Saturday.forEach(exercise=>{
+    if (exerciseCountSaturday[exercise.muscle]>=1) {
+      return exerciseCountSaturday[exercise.muscle]++;
+    } else{
+      return exerciseCountSaturday[exercise.muscle]=1
+    }
+  });
+
+  let mostTargetedSaturday="";
+  let highestCountSaturday=0;
+  for (const key in exerciseCountSaturday) {
+    if (exerciseCountSaturday[key]>highestCountSaturday) {
+      
+      mostTargetedSaturday=key;
+      highestCountSaturday=exerciseCountSaturday[key]
+      
+    }
+  }
+
   return (
     <Box sx={{marginTop:"5em", marginLeft:"2em"}}>
     <Typography variant="h6" component="h4" sx={{color:"white", width:"50vw", textAlign:"center", marginBottom:"1em"}}>Current Week Overview</Typography>
@@ -362,126 +539,105 @@ const DashboardList = (props) => {
     <Grid container spacing={1} rowSpacing={2} sx={{width:"50vw", backgroundColor:"#616161"}}>
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Sunday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Sunday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedSunday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Monday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Monday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedMonday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Tuesday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Tuesday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedTuesday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Wednesday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Wednesday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedWednesday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Thursday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Thursday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedThursday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Friday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Friday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedFriday}</Typography>
           </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center", marginLeft:"-7em"}}>
-            <Typography>{props.day}</Typography>
-            <IconButton onClick={()=>navigate("/view")}>
-                <VisibilityIcon/>
-              </IconButton>
+          <Box sx={{color:"white", display:"flex"}}>
+            <Typography>Saturday</Typography>
           </Box>
           <Box>
           <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.totalExercises}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{userState.Saturday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
-          <Typography sx={{color:"#7BEA9C"}}>{props.targetedMuscle}</Typography>
+          <Typography sx={{color:"#7BEA9C"}}>{mostTargetedSaturday}</Typography>
           </Box>
         </ListItem>
       </Grid>

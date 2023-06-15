@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import { DropDown, NumberInput } from './Input';
 import {ActionButton} from "../Components/Button";
 import { useSelector, useDispatch } from 'react-redux';
-import userService from '../services/user.service';
+import { useState } from 'react';
 import { setSets, setReps } from "../features/exercise/exerciseSlice";
 
 const style = {
@@ -22,6 +22,10 @@ const style = {
 const PopUp = (props) => {
   const state=useSelector(state=>state.exercise);
   const dispatch=useDispatch();
+  const addStyle={
+    display: props.added ? "block" : "none",
+    color:"white"
+  }
   const handleSetsChange=(e)=>{
     dispatch(setSets(parseInt(e.target.value)))
   }
@@ -34,8 +38,9 @@ const PopUp = (props) => {
             <Typography sx={{color:"white"}} variant="h4" component="h3">{props.method} {state.exercise.name}</Typography>
             <DropDown/>
             <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
-            <NumberInput action={handleRepsChange} number={state.sets} label="Reps"/>
+            <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
             <ActionButton action={props.action} variant="contained" text={props.method}/>
+            <p id="add-confirm" style={addStyle}>{props.confirmation}</p>
           </Box>
         </Modal>
     )
@@ -44,6 +49,10 @@ const PopUp = (props) => {
 const EditPopUp=props=>{
   const state=useSelector(state=>state.exercise);
   const dispatch=useDispatch();
+  const editStyle={
+    display: props.edited ? "block" : "none",
+    color:"white"
+  }
   const handleSetsChange=(e)=>{
     dispatch(setSets(parseInt(e.target.value)))
   }
@@ -57,6 +66,7 @@ const EditPopUp=props=>{
             <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
             <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
             <ActionButton action={props.action} variant="contained" text={props.method}/>
+            <p id="edit-confirm" style={editStyle}>{props.confirmation}</p>
           </Box>
         </Modal>
   )
