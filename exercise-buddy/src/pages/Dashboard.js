@@ -5,6 +5,7 @@ import { DashboardList } from "../Components/List";
 import authService from "../services/auth.service";
 import { useSelector, useDispatch } from "react-redux";
 import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday} from "../features/user/userSlice";
+import Chart from "react-apexcharts"
 
 const Dashboard=props=>{
     const user=JSON.parse(localStorage.getItem("user"))
@@ -34,11 +35,82 @@ const Dashboard=props=>{
     }
     }, [])
 
+    const userState=useSelector(state=>state.user);
+    let muscleGroups={};
+
+    userState.Sunday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Monday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Tuesday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Wednesday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Thursday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Friday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    userState.Saturday.forEach(exercise=>{
+        if (muscleGroups[exercise.muscle]>=1) {
+            return muscleGroups[exercise.muscle]++;
+        } else{
+            muscleGroups[exercise.muscle]=1
+        }
+    })
+
+    console.log(muscleGroups);
+
+    let count=[];
+    let labels=[]
+    for (const key in muscleGroups) {
+        count=[...count, muscleGroups[key]];
+        labels=[...labels, key];
+    }
+
     return(
         <div>
         <HamburgerMenu/>
         <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
+        <div className="flex items-center">
         <DashboardList/>
+        <Chart type="donut" series={count} options={{labels:labels, plotOptions:{pie:{customScale:1.0}}}} width={500} height={500}/>
+        </div>
         </div>
     )
 }

@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 
 
 function App() {
+  
   const filterState = useSelector(state=>state.filter);
   return (
     <div>

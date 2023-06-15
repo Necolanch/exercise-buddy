@@ -37,6 +37,7 @@ const Plan = props => {
     }, [])
 
     const state=useSelector(state=>state.user);
+    console.log(state);
     return(
         <Box>
           <HamburgerMenu/>

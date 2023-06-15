@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector} from "react-redux";
 import authService from "../services/auth.service";
 import userService from "../services/user.service";
 import apiService from "../services/api.service";
@@ -20,10 +20,9 @@ const Search = props => {
     const state=useSelector(state=>state.exercise);
 
     const [open, setOpen]=useState(false);
+    const [added, setAdded]=useState(false);
     const [search, setSearch]=useState([]);
-
-    //const state = useSelector(state=>state.filter);
-    //console.log(state);
+    
     const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.state.difficulty}&name=${props.state.name}&muscle=${props.state.muscle}&type=${props.state.type}`
     useEffect(()=>{
         if (!user) {
@@ -64,7 +63,9 @@ const Search = props => {
 
     const addExercise=()=>{
     userService.addExercise({day:state.day, ...state.exercise, sets:state.sets, reps:state.reps}, user.id)
-    .then(response=>console.log(response))
+    .then(response=>{
+        setAdded(true);
+    })
     .catch(err=>console.log(err))
   }
     return(
@@ -94,7 +95,7 @@ const Search = props => {
             <AddList exercises={search} handleOpen={handleOpen}/>
             </Box>
 
-            <PopUp action={addExercise} method="Add" open={open} handleClose={handleClose}/>
+            <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
         </Box>
     )
 }
