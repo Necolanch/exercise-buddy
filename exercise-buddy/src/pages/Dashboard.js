@@ -18,6 +18,8 @@ const Dashboard=props=>{
         }else{
         authService.getUser(user.id)
         .then(data=>{
+            if (data.response===undefined) {
+                console.log(data)
             dispatch(setUsername(data.username));
             dispatch(setId(data.id));
             dispatch(setSunday(data.Sunday));
@@ -28,7 +30,7 @@ const Dashboard=props=>{
             dispatch(setFriday(data.Friday));
             dispatch(setSaturday(data.Saturday));
             dispatch(setFavorites(data.favorites));
-            if (data.response.status===401) {
+            } else if (data.response.status===401){
                 navigate("/")
             }
         })
@@ -37,6 +39,7 @@ const Dashboard=props=>{
     }, [])
 
     const userState=useSelector(state=>state.user);
+    console.log(userState)
     let muscleGroups={};
 
     userState.Sunday.forEach(exercise=>{
@@ -94,8 +97,6 @@ const Dashboard=props=>{
             muscleGroups[exercise.muscle]=1
         }
     })
-
-    console.log(muscleGroups);
 
     let count=[];
     let labels=[]

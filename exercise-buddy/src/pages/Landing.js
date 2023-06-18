@@ -2,13 +2,22 @@ import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom"
 import { Box, Link, Typography } from "@mui/material";
 import {ActionButton} from "../Components/Button";
+import authService from "../services/auth.service";
 
 const Landing=()=>{
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate=useNavigate();
     useEffect(()=>{
         if (user) {
-            navigate("/home")
+            authService.getUser(user.id)
+            .then(response=>{
+                console.log(response.response.status)
+                if (response.response.status===401){
+                    return null
+                } else{
+                    navigate("/home")
+                }
+            })
         }
     },[])
     return(
