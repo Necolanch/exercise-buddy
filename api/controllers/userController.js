@@ -90,9 +90,12 @@ const removeFromPlan=async(req,res)=>{
     const filtered=user.dataValues[day].filter(exercise=>exercise.name!==req.body.exercise.name);
     return await User.update({[day]:filtered},
     {where:{id:req.params.id}})
-    .then(response=>{
-        console.log(response)
-        res.status(200).json(filtered)
+    .then(()=>{
+        User.findOne({where:{id:req.params.id}})
+            .then(data=>{
+                console.log(data)
+                res.status(200).json(data.dataValues[day])
+            })
     })
     .catch(err=>res.status(500).json(err))
 }
@@ -131,9 +134,12 @@ const removeFavorites=async(req,res)=>{
     const filtered=user.dataValues.favorites.filter(exercise=>exercise.name!==req.body.exercise.name)
     const updated=await User.update({favorites:filtered},
         {where:{id:req.params.id}})
-        .then(response=>{
-            console.log(response);
-            res.status(200).json(response)})
+        .then(()=>{
+            User.findOne({where:{id:req.params.id}})
+            .then(data=>{
+                res.status(200).json(data.dataValues.favorites)
+            })
+        })
         .catch(err=>res.status(500).json(err))
 }
 

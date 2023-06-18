@@ -4,19 +4,10 @@ import Modal from '@mui/material/Modal';
 import { DropDown, NumberInput } from './Input';
 import {ActionButton} from "../Components/Button";
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { setSets, setReps } from "../features/exercise/exerciseSlice";
 
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: "10vw",
-    bgcolor: '#4D5157',
-    border: '2px solid #FDF151',
-    boxShadow: 24,
-    p: 4,
+  backgroundColor:"rgba(0,0,0,0.6)", width:"100vw", height:"100vh", display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"
   }
 
 const PopUp = (props) => {
@@ -33,9 +24,9 @@ const PopUp = (props) => {
     dispatch(setReps(parseInt(e.target.value)))
   }
     return(
-        <Modal open={props.open} onClose={props.handleClose}>
-          <Box sx={{style}}>
-            <Typography sx={{color:"white"}} variant="h4" component="h3">{props.method} {state.exercise.name}</Typography>
+        <Modal sx={style} open={props.open} onClose={props.handleClose}>
+          <Box sx={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <Typography sx={{color:"white"}} variant="h5" component="h3">{props.method} {state.exercise.name}</Typography>
             <DropDown/>
             <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
             <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
@@ -60,8 +51,8 @@ const EditPopUp=props=>{
     dispatch(setReps(parseInt(e.target.value)))
   }
   return(
-    <Modal open={props.open} onClose={props.handleClose}>
-          <Box sx={{style}}>
+    <Modal sx={style} open={props.open} onClose={props.handleClose}>
+          <Box sx={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
             <Typography sx={{color:"white"}} variant="h4" component="h3">{props.method} {state.exercise.name}</Typography>
             <NumberInput action={handleSetsChange} number={state.sets} label="Sets"/>
             <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>

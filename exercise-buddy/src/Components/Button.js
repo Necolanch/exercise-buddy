@@ -17,7 +17,7 @@ const actionTheme = createTheme({
 const MainButton = (props) => {
   return (
     <ThemeProvider theme={mainTheme}>
-      <Button onClick={props.action} variant={props.variant}>{props.text}</Button>
+      <Button sx={{width:"35%", marginTop:"1em", '@media(min-width:800px)':{width:"20%"}, '@media(min-width:1200px)':{width:"10%"}}} onClick={props.action} variant={props.variant}>{props.text}</Button>
     </ThemeProvider>
   );
 };
@@ -25,7 +25,7 @@ const MainButton = (props) => {
 const ActionButton = (props) => {
   return (
     <ThemeProvider theme={actionTheme}>
-      <Button sx={{width:props.width}} onClick={props.action} variant={props.variant}>{props.text}</Button>
+      <Button sx={{width:"35%", marginTop:"1em", '@media(min-width:800px)':{width:"20%"}, '@media(min-width:1200px)':{width:"10%"}}} onClick={props.action} variant={props.variant}>{props.text}</Button>
     </ThemeProvider>
   );
 };

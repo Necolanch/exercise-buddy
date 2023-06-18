@@ -158,16 +158,20 @@ const EditPlan = props => {
             <HamburgerMenu/>
             <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
             
-          <Box sx={{display:"flex"}}>
+          <Box sx={{display:"flex", flexDirection:"column"}}>
             <Box>
             <DayList action={handleEditOpen} day={userState[exerciseState.day]}/>
             </Box>
 
-            <Box sx={{marginLeft:"20em", marginTop:"5em"}}>
+            
+
+                <Box sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                 <SearchInput/>
                 <MainButton action={applyFilters} variant="contained"/>
+                </Box>
+
+                <Box sx={{display:"flex", flexDirection:"column", marginLeft:"1em"}}>
                 <Typography sx={{color:"white", marginY:"1em"}}>Filter</Typography>
-                <ActionButton width="15%" action={applyFilters} variant="outlined" text="Apply Filters" />
 
                 <Box sx={{display:"flex", alignItems:"center"}}>
                 <Typography sx={{color:"white", marginRight:"1em"}}>Difficulty</Typography>
@@ -184,11 +188,15 @@ const EditPlan = props => {
                 <TypeFilter/>
                 </Box>
 
-                <Box sx={{marginTop:"2em"}}>
-                <Typography sx={{color:"white", textAlign:"center", marginLeft:"-10em"}}>Results</Typography>
+                <ActionButton width="30%" action={applyFilters} variant="outlined" text="Apply Filters" />
+
+                </Box>
+
+                <Box sx={{marginTop:"2em", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                <Typography sx={{color:"white", textAlign:"center"}}>Results</Typography>
                 <AddList exercises={search} handleOpen={handleOpen}/>
                 </Box>
-            </Box>
+
           </Box>
 
           <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>

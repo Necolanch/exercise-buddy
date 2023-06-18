@@ -6,6 +6,7 @@ import authService from "../services/auth.service";
 import { useSelector, useDispatch } from "react-redux";
 import { setFavorites, setUsername, setId, setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday} from "../features/user/userSlice";
 import Chart from "react-apexcharts"
+import { Box } from "@mui/material";
 
 const Dashboard=props=>{
     const user=JSON.parse(localStorage.getItem("user"))
@@ -107,10 +108,12 @@ const Dashboard=props=>{
         <div>
         <HamburgerMenu/>
         <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
-        <div className="flex items-center">
+        <Box sx={{width:"100vw", display:"flex", flexDirection:"column", '@media(min-width:800px)':{flexDirection:"row", alignItems:"center"}}}>
         <DashboardList/>
-        <Chart type="donut" series={count} options={{labels:labels, plotOptions:{pie:{customScale:1.0}}}} width={500} height={500}/>
-        </div>
+        <Box sx={{marginLeft:"-1em"}}>
+        <Chart type="donut" series={count} options={{legend:{labels:{colors:["#fff"]}}, labels:labels, plotOptions:{pie:{customScale:1.0}}}} width={350} height={350}/>
+        </Box>
+        </Box>
         </div>
     )
 }

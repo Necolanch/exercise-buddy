@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 
+import Image from "../IMG/exercising.jpg"
+
 const ViewExercise = props => {
   const user=JSON.parse(localStorage.getItem("user"))
     const navigate=useNavigate();
@@ -23,16 +25,17 @@ const ViewExercise = props => {
 
     }, [])
     return(
-        <Box sx={{}}>
+        <Box sx={{width:"100vw", height:"100vh", backgroundImage:`url(${Image})`, backgroundSize:"cover"}}>
+          <div>
           <HamburgerMenu/>
-          <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
           
           <Box sx={{marginTop:"2em"}}>
             <Link sx={{marginLeft:"1em"}} onClick={()=>navigate(-1)}>Previous Page</Link>
-            <Box sx={{marginTop:"10em"}}>
+            <Box sx={{ marginTop:"2em"}}>
             <Description/>
             </Box>
           </Box>
+          </div>
         </Box>
     )
 }
