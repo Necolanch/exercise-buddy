@@ -73,11 +73,11 @@ const Search = props => {
             <HamburgerMenu/>
             <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
             
-            <Box sx={{width:"100vw", display:"flex", alignItems:"center", marginY:"2em"}}>
+            <Box sx={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center", marginY:"2em"}}>
             <SearchInput/>
             <MainButton action={applyFilters} variant="contained"/>
 
-            <Box sx={{display:"flex", flexDirection:"column", marginLeft:"25em"}}>
+            <Box sx={{display:"flex", flexDirection:"column", marginLeft:"2em"}}>
             <Typography sx={{color:"white"}}>Filter</Typography>
             <Typography sx={{color:"white", marginTop:"1em"}}>Difficulty</Typography>
             <DifficultyFilter/>
@@ -85,13 +85,13 @@ const Search = props => {
             <MuscleFilter/>
             <Typography sx={{color:"white", marginTop:"1em"}}>Type</Typography>
             <TypeFilter/>
-            <ActionButton width="15%" action={applyFilters} variant="outlined" text="Apply Filters" />
+            <ActionButton width="35%" action={applyFilters} variant="outlined" text="Apply Filters" />
             </Box>
 
             </Box>
 
-            <Box sx={{display:"flex", flexDirection:"column", marginLeft:"5em"}}>
-            <Typography variant="h6" sx={{color:"white ",width:"50vw", textAlign:"center", marginLeft:"-4em"}}>Results</Typography>
+            <Box sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <Typography variant="h6" component="h6" sx={{color:"white ",width:"50vw", textAlign:"center"}}>Results</Typography>
             <AddList exercises={search} handleOpen={handleOpen}/>
             </Box>
 

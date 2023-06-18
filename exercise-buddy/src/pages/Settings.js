@@ -30,8 +30,8 @@ const Settings=()=>{
 
             <Box sx={{width:"100%", height:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                 <Typography variant="h4" component="h3" sx={{color:"white"}}>Settings</Typography>
-                <FormControl sx={{width:"20vw", height:"50vh", padding:"2em", backgroundColor:"#7BEA9C", display:"flex", flexDirection:"column", justifyContent:"center"}}>
-                    <TextField color="secondary" value={user.username} label="Username" variant="standard" disabled/>
+                <FormControl sx={{width:"75%", height:"50vh", marginTop:"1em", padding:"2em", backgroundColor:"#7BEA9C", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", '@media(min-width:550px)':{width:"60%"}, '@media(min-width:700px)':{width:"50%"}, '@media(min-width:1200px)':{width:"30%"}}}>
+                    <TextField sx={{width:"100%", '@media(min-width:550px)':{width:"80%"}}} color="secondary" value={user.username} label="Username" variant="standard" disabled/>
                     <Link sx={{marginTop:"1em"}}>Change Password</Link>
                     <Link sx={{marginTop:"1em"}}>Change Username</Link>
                 </FormControl>

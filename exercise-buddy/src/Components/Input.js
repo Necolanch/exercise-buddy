@@ -32,14 +32,16 @@ const SearchInput = (props) => {
                   <SearchIcon sx={{paddingLeft:".5em"}}/>
                 </InputAdornment>
             )
-        }} sx={{ backgroundColor:"white", width:"25vw", paddingTop:".5em"}}/>
+        }} sx={{ backgroundColor:"white", width:"65%", paddingTop:".5em", '@media(min-width:800px)':{width:"50%"}, '@media(min-width:1200px)':{width:'25%'}}}/>
     )
 }
 
 const NumberInput = (props) => {
     return(
-        <TextField onChange={props.action} defaultValue={props.number} variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"5vw", textAlign:"center"}}/>
-    )
+        <Box sx={{width:"100vw", display:"flex", justifyContent:"center", marginTop:"1em"}}>
+        <TextField onChange={props.action} defaultValue={props.number} variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"50vw", textAlign:"center", '@media(min-width:500px)':{width:"35vw"}, '@media(min-width:800px)':{width:"25vw"}, '@media(min-width:1200px)':{width:"10vw"}}}/>
+        </Box>
+   )
 }
 
 const DropDown = (props) => {
@@ -50,9 +52,9 @@ const DropDown = (props) => {
         console.log(state);
       };
     return(
-        <Box>
+        <Box sx={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <InputLabel id="demo-simple-select-label" sx={{color:"#FAFAFF"}}>Day</InputLabel>
-        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Day" value={state.day} sx={{width:"10vw", backgroundColor:"#FAFAFF"}}>
+        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Day" value={state.day} sx={{width:"80%", backgroundColor:"#FAFAFF", '@media(min-width:500px)':{width:"50%"}, '@media(min-width:800px)':{width:"30%"}, '@media(min-width:1200px)':{width:"20%"}}}>
           <MenuItem id="Sunday" onClick={handleChange} value="Sunday">Sunday</MenuItem>
           <MenuItem id="Monday" onClick={handleChange} value="Monday">Monday</MenuItem>
           <MenuItem id="Tuesday" onClick={handleChange} value="Tuesday">Tuesday</MenuItem>

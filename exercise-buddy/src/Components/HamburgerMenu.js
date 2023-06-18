@@ -37,14 +37,14 @@ const HamburgerMenu = (props) => {
           <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)", padding:"1em"}}>
             <Toolbar>
               <img src={require("../IMG/EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
-              <Typography variant="h4" component="div" sx={{ flexGrow: 1, textAlign:"center" }}>
+              <Typography variant="h4" component="h1" sx={{ flexGrow: 1, textAlign:"center" }}>
                 {props.title}
               </Typography>
-              <IconButton size="large" edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} sx={{ mr: 2 }}>
+              <IconButton size="large" edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} sx={{ mr: 1 }}>
                 <MenuIcon />
               </IconButton>
               <Drawer anchor="right" variant="temporary" open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)}>
-              <Box sx={{width: "20vw", height:"100vh", p: 2, height: 1, backgroundColor: "#FDF151"}}>
+              <Box sx={{height:"100vh", p: 2, backgroundColor: "#FDF151"}}>
                 <IconButton onClick={toggleDrawer(false)} sx={{mb: 2}}>
                   <CloseIcon />
                 </IconButton>
