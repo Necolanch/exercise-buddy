@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { PropTypes } from "prop-types";
+import authService from '../services/auth.service';
 
 const HamburgerMenu = (props) => {
     const [open,setOpen]=useState(false);
@@ -27,24 +28,28 @@ const HamburgerMenu = (props) => {
         setOpen(state);
       };
     const navigate=useNavigate();
+    const handleLogout=()=>{
+      authService.logout()
+      .then(()=>{navigate("/")})
+    }
     return (
         <Box sx={{flexGrow:1}}>
           <AppBar position="static" sx={{backgroundColor:"rgba(0,0,0,0)", padding:"1em"}}>
             <Toolbar>
               <img src={require("../IMG/EB-logo.png")} alt="Exercise Buddy Logo" width="50" height="50"/>
-              <Typography variant="h4" component="div" sx={{ flexGrow: 1, textAlign:"center" }}>
+              <Typography variant="h4" component="h1" sx={{ flexGrow: 1, textAlign:"center" }}>
                 {props.title}
               </Typography>
-              <IconButton size="large" edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} sx={{ mr: 2 }}>
+              <IconButton size="large" edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} sx={{ mr: 1 }}>
                 <MenuIcon />
               </IconButton>
               <Drawer anchor="right" variant="temporary" open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)}>
-              <Box sx={{width: "20vw", p: 2, height: 1, backgroundColor: "#FDF151"}}>
+              <Box sx={{height:"100vh", p: 2, backgroundColor: "#FDF151"}}>
                 <IconButton onClick={toggleDrawer(false)} sx={{mb: 2}}>
                   <CloseIcon />
                 </IconButton>
 
-                <ListItemButton onClick={()=>navigate("/")}>
+                <ListItemButton onClick={()=>navigate("/home")}>
                     <ListItemIcon>
                         <HomeIcon/>
                     </ListItemIcon>
@@ -77,6 +82,9 @@ const HamburgerMenu = (props) => {
                         <SettingsIcon/>
                     </ListItemIcon>
                       <ListItemText primary="Settings" />
+                </ListItemButton>
+                <ListItemButton onClick={handleLogout}>
+                <Typography position="bottom-0" on>Logout</Typography>
                 </ListItemButton>
               </Box>
               </Drawer>

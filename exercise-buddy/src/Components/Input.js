@@ -9,6 +9,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { PropTypes } from "prop-types";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setName } from "../features/filters/filterSlice";
+import { setDay } from "../features/exercise/exerciseSlice";
+
 const CustomTextField = styled(TextField)({
     "label":{
         paddingTop:".5em",
@@ -17,39 +21,47 @@ const CustomTextField = styled(TextField)({
 })
 
 const SearchInput = (props) => {
+    const dispatch=useDispatch();
+    const handleChange=e=>{
+        dispatch(setName(e.target.value));
+    }
     return(
-        <CustomTextField placeholder={props.placeholder} variant="standard" label={props.label} InputProps={{
+        <CustomTextField onChange={handleChange} placeholder={props.placeholder} variant="standard" label={props.label} InputProps={{
             startAdornment:(
                 <InputAdornment position="start">
                   <SearchIcon sx={{paddingLeft:".5em"}}/>
                 </InputAdornment>
             )
-        }} sx={{ backgroundColor:"white", width:"25vw", paddingTop:".5em"}}/>
+        }} sx={{ backgroundColor:"white", width:"65%", paddingTop:".5em", '@media(min-width:800px)':{width:"50%"}, '@media(min-width:1200px)':{width:'25%'}}}/>
     )
 }
 
 const NumberInput = (props) => {
     return(
-        <TextField variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"5vw", textAlign:"center"}}/>
-    )
+        <Box sx={{width:"100vw", display:"flex", justifyContent:"center", marginTop:"1em"}}>
+        <TextField onChange={props.action} defaultValue={props.number} variant="standard" label={props.label} InputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} sx={{backgroundColor:"white", width:"50vw", textAlign:"center", '@media(min-width:500px)':{width:"35vw"}, '@media(min-width:800px)':{width:"25vw"}, '@media(min-width:1200px)':{width:"10vw"}}}/>
+        </Box>
+   )
 }
 
 const DropDown = (props) => {
-    const [day,setDay]=useState("");
-    const handleChange = (event) => {
-        setDay(event.target.value);
+    const state = useSelector(state=>state.exercise);
+    const dispatch=useDispatch();
+    const handleChange = (e) => {
+        dispatch(setDay(e.target.id));
+        console.log(state);
       };
     return(
-        <Box>
+        <Box sx={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <InputLabel id="demo-simple-select-label" sx={{color:"#FAFAFF"}}>Day</InputLabel>
-        <Select labelId="demo-simple-select-label" id="demo-simple-select" value={day} label="Day" sx={{width:"10vw", backgroundColor:"#FAFAFF"}} onChange={handleChange}>
-          <MenuItem value="Sunday">Sunday</MenuItem>
-          <MenuItem value="Monday">Monday</MenuItem>
-          <MenuItem value="Tuesday">Tuesday</MenuItem>
-          <MenuItem value="Wednesday">Wednesday</MenuItem>
-          <MenuItem value="Thursday">Thursday</MenuItem>
-          <MenuItem value="Friday">Friday</MenuItem>
-          <MenuItem value="Saturday">Saturday</MenuItem>
+        <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Day" value={state.day} sx={{width:"80%", backgroundColor:"#FAFAFF", '@media(min-width:500px)':{width:"50%"}, '@media(min-width:800px)':{width:"30%"}, '@media(min-width:1200px)':{width:"20%"}}}>
+          <MenuItem id="Sunday" onClick={handleChange} value="Sunday">Sunday</MenuItem>
+          <MenuItem id="Monday" onClick={handleChange} value="Monday">Monday</MenuItem>
+          <MenuItem id="Tuesday" onClick={handleChange} value="Tuesday">Tuesday</MenuItem>
+          <MenuItem id="Wednesday" onClick={handleChange} value="Wednesday">Wednesday</MenuItem>
+          <MenuItem id="Thursday" onClick={handleChange} value="Thursday">Thursday</MenuItem>
+          <MenuItem id="Friday" onClick={handleChange} value="Friday">Friday</MenuItem>
+          <MenuItem id="Saturday" onClick={handleChange} value="Saturday">Saturday</MenuItem>
         </Select>
         </Box>
     )

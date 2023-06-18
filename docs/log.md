@@ -67,4 +67,33 @@ align with my desired tech stack.
 <br>
 🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
 
+
+### Week 2 Project Portfolio 5
+
+⚙️ Overview - This week I programmed and tested my authorization for signup and authentication for login functionalities.
 <br>
+🌵 Challenges - I struggled getting back into the mind of front-end development, particularly with MaterialUI. It feels a little more restricting than what I remember.
+<br>
+🏆 Accomplishments - I learned how to send a JWT as an httpOnly cookie rather than storing it in localStorage for extra security.
+<br>
+🔮 Next Steps - Next I plan to finish my Splitgate Data Portal portfolio project and deploy it.
+
+### Week 3 Project Portfolio 5
+
+⚙️ Overview - This week I connected some of the frontend to the backend and managed state through Redux Toolkit.
+<br>
+🌵 Challenges - I had a tough time getting the radio buttons for the filters to differentiate between being checked. I was not naming that at first.
+<br>
+🏆 Accomplishments - I learned Redux Toolkit.
+<br>
+🔮 Next Steps - I plan to finish connecting the frontend and testing it.
+
+### Week 4 Project Portfolio 5
+
+⚙️ Overview - This week I finished the rest of the functionality needed for the project.
+<br>
+🌵 Challenges - I was trying to make code as DRY as possible but it was tough trying to balance that worry with trying to just get the functionality working as needed.
+<br>
+🏆 Accomplishments - I finished the necessary functionality.
+<br>
+🔮 Next Steps - I need to add a view and functionality for changing the username and/or password.
