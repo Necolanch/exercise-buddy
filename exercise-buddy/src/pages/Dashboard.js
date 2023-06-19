@@ -19,7 +19,6 @@ const Dashboard=props=>{
         authService.getUser(user.id)
         .then(data=>{
             if (data.response===undefined) {
-                console.log(data)
             dispatch(setUsername(data.username));
             dispatch(setId(data.id));
             dispatch(setSunday(data.Sunday));
@@ -39,7 +38,6 @@ const Dashboard=props=>{
     }, [])
 
     const userState=useSelector(state=>state.user);
-    console.log(userState)
     let muscleGroups={};
 
     userState.Sunday.forEach(exercise=>{

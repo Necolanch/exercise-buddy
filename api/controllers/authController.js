@@ -56,31 +56,27 @@ const login = async(req,res)=>{
 
     if (user===null) {
         res.status(400).json({message:"Username not found"});
+    } else{
+        const correctPassword=await bcrypt.compare(req.body.password, user.dataValues.password)
+        if (req.body.password==="") {
+           res.status(400).json({message:"Please input a password"});
+       } else if (!correctPassword) {
+           res.status(400).json({message:"Incorrect password"});
+       } else {const token=jwt.sign({id:user.dataValues.id}, secret)
+       res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-production.onrender.com"}).json({message:"Logged in",user:{
+           id:user.dataValues.id,
+           username:user.dataValues.username,
+           favorites: user.dataValues.favorites,
+           Sunday:user.dataValues.Sunday,
+       Monday:user.dataValues.Monday,
+       Tuesday:user.dataValues.Tuesday,
+       Wednesday:user.dataValues.Wednesday,
+       Thursday:user.dataValues.Thursday,
+       Friday:user.dataValues.Friday,
+       Saturday:user.dataValues.Saturday
+       }})
+   }
     }
-
-    if (req.body.password===undefined) {
-        res.status(400).json({message:"Please input a password"});
-    }
-
-    const correctPassword=await bcrypt.compare(req.body.password, user.dataValues.password)
-
-    if (!correctPassword) {
-        res.status(400).json({message:"Incorrect password"});
-    }
-
-    const token=jwt.sign({id:user.dataValues.id}, secret)
-    res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-production.onrender.com"}).json({message:"Logged in",user:{
-        id:user.dataValues.id,
-        username:user.dataValues.username,
-        favorites: user.dataValues.favorites,
-        Sunday:user.dataValues.Sunday,
-    Monday:user.dataValues.Monday,
-    Tuesday:user.dataValues.Tuesday,
-    Wednesday:user.dataValues.Wednesday,
-    Thursday:user.dataValues.Thursday,
-    Friday:user.dataValues.Friday,
-    Saturday:user.dataValues.Saturday
-    }})
 }
 
 const logout=async(req,res)=>{
