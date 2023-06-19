@@ -17,18 +17,36 @@ const Login=()=>{
                 if (response.response===undefined) {
                     localStorage.setItem("user", JSON.stringify(response.user));
                     navigate("/home");
+                } else if (response.response.data.message==="Please enter a username") {
+                    const inputError=document.getElementById("input-error");
+                    inputError.style.display="none"
+
+                    const passwordError=document.getElementById("password-error");
+                    passwordError.style.display="none"
+
+                    const usernameError=document.getElementById("username-error");
+                    usernameError.style.display="none"
+                    
+                    const userError=document.getElementById("user-error");
+                    userError.style.display="block"
                 } else if (response.response.data.message==="Username not found") {
                     const inputError=document.getElementById("input-error");
                     inputError.style.display="none"
 
                     const passwordError=document.getElementById("password-error");
                     passwordError.style.display="none"
+
+                    const userError=document.getElementById("user-error");
+                    userError.style.display="none"
                     
                     const usernameError=document.getElementById("username-error");
                     usernameError.style.display="block"
                 } else if (response.response.data.message==="Please input a password") {
                     const passwordError=document.getElementById("password-error");
                     passwordError.style.display="none"
+
+                    const userError=document.getElementById("user-error");
+                    userError.style.display="none"
                     
                     const usernameError=document.getElementById("username-error");
                     usernameError.style.display="none"
@@ -38,6 +56,9 @@ const Login=()=>{
                 } else if (response.response.data.message==="Incorrect password") {
                     const inputError=document.getElementById("input-error");
                     inputError.style.display="none"
+
+                    const userError=document.getElementById("user-error");
+                    userError.style.display="none"
 
                     const usernameError=document.getElementById("username-error");
                     usernameError.style.display="none"
@@ -58,6 +79,7 @@ const Login=()=>{
             <TextField variant="standard" sx={{backgroundColor:"whitesmoke", marginBottom:"1em", width:"60%", '@media(min-width:800px)':{width:"50%"}, '@media(min-width:1200px)':{width:"30%"}}} onChange={e=>setUsername(e.target.value)} id="username" label="Username" type="text"/>
             <TextField variant="standard" sx={{backgroundColor:"whitesmoke", marginBottom:"1em", width:"60%", '@media(min-width:800px)':{width:"50%"}, '@media(min-width:1200px)':{width:"30%"}}} onChange={e=>setPassword(e.target.value)} id="password" label="Password" type="password"/>
             <ActionButton action={handleLogin} variant="contained" text="Login"/>
+            <p id="user-error" style={{display:"none", color:"white"}}>Please enter a username</p>
             <p id="username-error" style={{display:"none", color:"white"}}>Username not found</p>
             <p id="input-error" style={{display:"none", color:"white"}}>Please input a password</p>
             <p id="password-error" style={{display:"none", color:"white"}}>Incorrect password</p>

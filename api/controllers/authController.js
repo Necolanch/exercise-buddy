@@ -54,7 +54,9 @@ const create=async(req,res)=>{
 const login = async(req,res)=>{
     const user = await User.findOne({where:{username:req.body.username}});
 
-    if (user===null) {
+    if (req.body.username==="") {
+        res.status(400).json({message:"Please enter a username"})
+    } else if (user===null) {
         res.status(400).json({message:"Username not found"});
     } else{
         const correctPassword=await bcrypt.compare(req.body.password, user.dataValues.password)
