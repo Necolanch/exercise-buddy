@@ -25,9 +25,9 @@ const ViewExercise = props => {
 
     }, [])
     return(
-        <Box sx={{width:"100vw", height:"100vh", backgroundImage:`url(${Image})`, backgroundSize:"cover"}}>
-          <div>
+        <Box sx={{width:"100vw", height:"100vh"}}>
           <HamburgerMenu/>
+          <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
           
           <Box sx={{marginTop:"2em"}}>
             <Link sx={{marginLeft:"1em"}} onClick={()=>navigate(-1)}>Previous Page</Link>
@@ -35,7 +35,6 @@ const ViewExercise = props => {
             <Description/>
             </Box>
           </Box>
-          </div>
         </Box>
     )
 }
