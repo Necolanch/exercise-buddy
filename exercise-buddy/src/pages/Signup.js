@@ -1,5 +1,5 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import { ActionButton } from "../Components/Button";
 import authService from "../services/auth.service";
@@ -9,6 +9,11 @@ const Signup=()=>{
     const [password, setPassword]=useState("");
     const [confirmPassword, setConfirmPassword]=useState("");
     const navigate=useNavigate();
+
+    useEffect(()=>{
+        console.log(password);
+        console.log(confirmPassword);
+    }, [password])
 
     const handleSignup=async(e)=>{
         e.preventDefault();
@@ -26,6 +31,8 @@ const Signup=()=>{
                 const userError=document.getElementById("user-error");
                 userError.style.display="block"
             } else if (password!==confirmPassword) {
+                console.log(password);
+                console.log(confirmPassword)
                 const passwordError=document.getElementById("password-error");
                 passwordError.style.display="none"
 
