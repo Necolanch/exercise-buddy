@@ -2,7 +2,7 @@ import axios from "axios";
 const API_BASE=process.env.NODE_ENV==="production" ? process.env.REACT_APP_BASE_URL : "http://localhost:3030" 
 
 const signup=(username, password, confirm)=>{
-    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&{}'"()^#|:;.,<>/?`~_-])[A-Za-z\d@$!%*?&}]{8,}$/;
+    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&{}'"()^#|:;.,<>/?`~_-])[A-Za-z\d@$!%*?&{}'"()^#|:;.,<>/?`~_-}]{8,}$/;
     const passwordTest=re.test(password);
     if (password!==confirm) {
         throw Error("Passwords do not match");
