@@ -210,6 +210,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Sunday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Sunday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -236,6 +237,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Monday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Monday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -262,6 +264,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Tuesday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Tuesday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -288,6 +291,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Wednesday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Wednesday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -314,6 +318,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Thursday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Thursday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -340,6 +345,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Friday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Friday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -366,6 +372,7 @@ const PlanList = (props) =>{
             
             <Box sx={{width:"100vw", display:"flex", flexDirection:"column", flexWrap:"wrap", justifyContent:"center", alignItems:"center", '@media(min-width:800px)':{flexDirection:"row"}}}>
             {
+              props.state.Saturday.length===0 ? <Typography sx={{color:"whitesmoke"}}>Rest Day</Typography> :
               props.state.Saturday.map(exercise=>{
                 return(
                   <Box key={exercise.name} sx={{width:"75vw", marginTop:"1em", '@media(min-width:800px)':{width:"25%", margin:"1em"}}}>
@@ -389,6 +396,8 @@ const PlanList = (props) =>{
 
 const DashboardList = (props) => {
   const userState=useSelector(state=>state.user);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   let exerciseCountSunday={}
   const exerciseSunday = userState.Sunday.forEach(exercise=>{
@@ -530,6 +539,11 @@ const DashboardList = (props) => {
     }
   }
 
+  const editDay=(day)=>{
+    dispatch(setDay(day));
+    navigate("/edit")
+  }
+
   return (
     <Box sx={{marginTop:"5em", marginBottom:"5em", width:"100vw",  display:"flex", flexDirection:"column", alignItems:"center", '@media(min-width:1200px)':{width:"65vw"}}}>
     <Typography variant="h6" component="h4" sx={{color:"white", textAlign:"center", marginBottom:"1em"}}>Current Week Overview</Typography>
@@ -537,105 +551,161 @@ const DashboardList = (props) => {
     <Grid container spacing={1} rowSpacing={2} sx={{ backgroundColor:"#616161"}}>
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+          <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Sunday</Typography>
+            <IconButton onClick={()=>editDay("Sunday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Sunday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Sunday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedSunday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Monday</Typography>
+            <IconButton onClick={()=>editDay("Monday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Monday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Monday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedMonday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Tuesday</Typography>
+            <IconButton onClick={()=>editDay("Tuesday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Tuesday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Tuesday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedTuesday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Wednesday</Typography>
+            <IconButton onClick={()=>editDay("Wednesday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Wednesday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Wednesday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedWednesday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Thursday</Typography>
+            <IconButton onClick={()=>editDay("Thursday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Thursday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Thursday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedThursday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Friday</Typography>
+            <IconButton onClick={()=>editDay("Friday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Friday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Friday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedFriday}</Typography>
           </Box>
+          }
+          </Box>
         </ListItem>
       </Grid>
 
       <Grid item sm={4}>
         <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Saturday</Typography>
+            <IconButton onClick={()=>editDay("Saturday")} aria-label="edit">
+              <EditIcon sx={{color:"whitesmoke"}}/>
+            </IconButton>
           </Box>
           <Box>
-          <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
+          {
+            userState.Saturday.length===0 ? <Typography>Rest Day</Typography> :
+            <Box>
+            <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Saturday.length}</Typography>
           <Divider sx={{backgroundColor:"#99D7DB", marginY:"1em"}}/>
           <Typography sx={{color:"#FDF151"}}>Most Targeted Muscle Group</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{mostTargetedSaturday}</Typography>
+          </Box>
+          }
           </Box>
         </ListItem>
       </Grid>

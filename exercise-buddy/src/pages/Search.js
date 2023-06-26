@@ -21,6 +21,7 @@ const Search = props => {
 
     const [open, setOpen]=useState(false);
     const [added, setAdded]=useState(false);
+    const [error, setError]=useState(false);
     const [search, setSearch]=useState([]);
     
     const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.state.difficulty}&name=${props.state.name}&muscle=${props.state.muscle}&type=${props.state.type}`
@@ -62,11 +63,17 @@ const Search = props => {
     }
 
     const addExercise=()=>{
+        if (state.sets === 0 || state.reps===0) {
+            setError(true);
+            throw new Error("Sets and reps has to include 1 or more of each");
+        } else{
     userService.addExercise({day:state.day, ...state.exercise, sets:state.sets, reps:state.reps}, user.id)
     .then(response=>{
+        setError(false);
         setAdded(true);
     })
     .catch(err=>console.log(err))
+}
   }
     return(
         <Box sx={{width:"100vw"}}>
@@ -95,7 +102,7 @@ const Search = props => {
             <AddList exercises={search} handleOpen={handleOpen}/>
             </Box>
 
-            <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
+            <PopUp error={error} added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
         </Box>
     )
 }
