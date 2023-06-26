@@ -17,6 +17,10 @@ const PopUp = (props) => {
     display: props.added ? "block" : "none",
     color:"white"
   }
+  const errorStyle={
+    display: props.error ? "block" : "none",
+    color:"white"
+  }
   const handleSetsChange=(e)=>{
     dispatch(setSets(parseInt(e.target.value)))
   }
@@ -32,6 +36,7 @@ const PopUp = (props) => {
             <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
             <ActionButton action={props.action} variant="contained" text={props.method}/>
             <p id="add-confirm" style={addStyle}>{props.confirmation}</p>
+            <p style={errorStyle}>Sets and reps must have a value 1 or more</p>
           </Box>
         </Modal>
     )
@@ -42,6 +47,10 @@ const EditPopUp=props=>{
   const dispatch=useDispatch();
   const editStyle={
     display: props.edited ? "block" : "none",
+    color:"white"
+  }
+  const errorStyle={
+    display: props.error ? "block" : "none",
     color:"white"
   }
   const handleSetsChange=(e)=>{
@@ -58,6 +67,7 @@ const EditPopUp=props=>{
             <NumberInput action={handleRepsChange} number={state.reps} label="Reps"/>
             <ActionButton action={props.action} variant="contained" text={props.method}/>
             <p id="edit-confirm" style={editStyle}>{props.confirmation}</p>
+            <p style={errorStyle}>Sets and reps must have a value 1 or more</p>
           </Box>
         </Modal>
   )

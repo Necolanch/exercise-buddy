@@ -76,13 +76,6 @@ const HamburgerMenu = (props) => {
                     </ListItemIcon>
                       <ListItemText primary="Favorites" />
                 </ListItemButton>
-
-                <ListItemButton onClick={()=>navigate("/settings")}>
-                    <ListItemIcon>
-                        <SettingsIcon/>
-                    </ListItemIcon>
-                      <ListItemText primary="Settings" />
-                </ListItemButton>
                 <ListItemButton onClick={handleLogout}>
                 <Typography position="bottom-0" on>Logout</Typography>
                 </ListItemButton>
