@@ -549,17 +549,17 @@ const DashboardList = (props) => {
     <Typography variant="h6" component="h4" sx={{color:"white", textAlign:"center", marginBottom:"1em"}}>Current Week Overview</Typography>
     <List sx={{width:"75%"}}>
     <Grid container spacing={1} rowSpacing={2} sx={{ backgroundColor:"#616161"}}>
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
-          <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
+    <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
+        <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Sunday</Typography>
             <IconButton onClick={()=>editDay("Sunday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Sunday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Sunday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Sunday.length}</Typography>
@@ -572,17 +572,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Monday</Typography>
             <IconButton onClick={()=>editDay("Monday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Monday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Monday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Monday.length}</Typography>
@@ -595,17 +595,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Tuesday</Typography>
             <IconButton onClick={()=>editDay("Tuesday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Tuesday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Tuesday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Tuesday.length}</Typography>
@@ -618,17 +618,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Wednesday</Typography>
             <IconButton onClick={()=>editDay("Wednesday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Wednesday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Wednesday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Wednesday.length}</Typography>
@@ -641,17 +641,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Thursday</Typography>
             <IconButton onClick={()=>editDay("Thursday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Thursday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Thursday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Thursday.length}</Typography>
@@ -664,17 +664,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Friday</Typography>
             <IconButton onClick={()=>editDay("Friday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Friday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Friday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Friday.length}</Typography>
@@ -687,17 +687,17 @@ const DashboardList = (props) => {
         </ListItem>
       </Grid>
 
-      <Grid item sm={4}>
-        <ListItem sx={{display:"flex", flexDirection:"column"}}>
+      <Grid item sm={4} sx={{width:"100%"}}>
+        <ListItem sx={{ width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Box sx={{color:"white", display:"flex", alignItems:"center"}}>
             <Typography>Saturday</Typography>
             <IconButton onClick={()=>editDay("Saturday")} aria-label="edit">
               <EditIcon sx={{color:"whitesmoke"}}/>
             </IconButton>
           </Box>
-          <Box>
+          <Box sx={{width:"100%"}}>
           {
-            userState.Saturday.length===0 ? <Typography>Rest Day</Typography> :
+            userState.Saturday.length===0 ? <Typography sx={{display:"flex", justifyContent:"center", color:"#FDF151"}}>Rest Day</Typography> :
             <Box>
             <Typography sx={{color:"#FDF151"}}>Total Exercises</Typography>
           <Typography sx={{color:"#7BEA9C"}}>{userState.Saturday.length}</Typography>
