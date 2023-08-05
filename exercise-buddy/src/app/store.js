@@ -6,3 +6,5 @@ import userReducer from "../features/user/userSlice";
 export const store = configureStore({
   reducer: {filter:filterReducer, exercise:exerciseReducer, user:userReducer},
 })
+
+//icon extension update
