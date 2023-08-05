@@ -30,7 +30,7 @@ const create=async(req,res)=>{
                 secret
             );
     
-            res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-production.onrender.com"}).json({user:{
+            res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"calm-tan-slug-tutu.cyclic.app"}).json({user:{
                 id:response.dataValues.id,
                 username:response.dataValues.username,
                 favorites: response.dataValues.favorites,
@@ -65,7 +65,7 @@ const login = async(req,res)=>{
        } else if (!correctPassword) {
            res.status(400).json({message:"Incorrect password"});
        } else {const token=jwt.sign({id:user.dataValues.id}, secret)
-       res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-production.onrender.com"}).json({message:"Logged in",user:{
+       res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"calm-tan-slug-tutu.cyclic.app"}).json({message:"Logged in",user:{
            id:user.dataValues.id,
            username:user.dataValues.username,
            favorites: user.dataValues.favorites,
