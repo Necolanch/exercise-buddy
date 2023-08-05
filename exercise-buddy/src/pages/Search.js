@@ -12,7 +12,7 @@ import {MainButton, ActionButton} from "../Components/Button";
 import {PopUp} from "../Components/Popup";
 
 
-import { Box, Typography } from "@mui/material";
+import { Box, FormControl, Typography } from "@mui/material";
 
 const Search = props => {
     const user=JSON.parse(localStorage.getItem("user"))
@@ -21,6 +21,7 @@ const Search = props => {
 
     const [open, setOpen]=useState(false);
     const [added, setAdded]=useState(false);
+    const [error, setError]=useState(false);
     const [search, setSearch]=useState([]);
     
     const url=`https://api.api-ninjas.com/v1/exercises?difficulty=${props.state.difficulty}&name=${props.state.name}&muscle=${props.state.muscle}&type=${props.state.type}`
@@ -53,7 +54,8 @@ const Search = props => {
         setOpen(false);
     }
 
-     const applyFilters=()=>{
+     const applyFilters=(e)=>{
+        e.preventDefault();
         apiService.normal(url)
         .then(data=>{
             setSearch(data.data);
@@ -62,18 +64,24 @@ const Search = props => {
     }
 
     const addExercise=()=>{
+        if (state.sets === 0 || state.reps===0) {
+            setError(true);
+            throw new Error("Sets and reps has to include 1 or more of each");
+        } else{
     userService.addExercise({day:state.day, ...state.exercise, sets:state.sets, reps:state.reps}, user.id)
     .then(response=>{
+        setError(false);
         setAdded(true);
     })
     .catch(err=>console.log(err))
+}
   }
     return(
         <Box sx={{width:"100vw"}}>
             <HamburgerMenu/>
             <img src={require("../IMG/exercising.jpg")} alt="People exercising background" style={{position:"absolute", width:"100vw", height:"100vh", opacity:".03", filter:"grayscale(100%)", zIndex:"-99"}}/>
             
-            <Box sx={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center", marginY:"2em"}}>
+            <form onSubmit={(e)=>applyFilters(e)} style={{width:"100vw", display:"flex", flexDirection:"column", alignItems:"center", marginTop:"2em"}}>
             <SearchInput/>
             <MainButton action={applyFilters} variant="contained"/>
 
@@ -88,14 +96,14 @@ const Search = props => {
             <ActionButton width="35%" action={applyFilters} variant="outlined" text="Apply Filters" />
             </Box>
 
-            </Box>
+            </form>
 
             <Box sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <Typography variant="h6" component="h6" sx={{color:"white ",width:"50vw", textAlign:"center"}}>Results</Typography>
             <AddList exercises={search} handleOpen={handleOpen}/>
             </Box>
 
-            <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
+            <PopUp error={error} added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
         </Box>
     )
 }

@@ -25,6 +25,7 @@ const EditPlan = props => {
     const [open, setOpen]=useState(false);
     const [editOpen, setEditOpen]=useState(false);
     const [edited, setEdited]=useState(false);
+    const [error, setError]=useState(false);
     const [added, setAdded]=useState(false);
     const exerciseState=useSelector(state=>state.exercise);
     const userState=useSelector(state=>state.user);
@@ -75,8 +76,14 @@ const EditPlan = props => {
     } 
 
     const addExercise=()=>{
+        if (exerciseState.sets === 0 || exerciseState.reps===0) {
+            setError(true)
+            throw new Error("Sets and reps has to include 1 or more of each");
+        } else{
         userService.addExercise({day:exerciseState.day, ...exerciseState.exercise, sets:exerciseState.sets, reps:exerciseState.reps}, user.id)
         .then(response=>{
+            setError(false);
+            setAdded(true)
             switch (exerciseState.day) {
                 case "Sunday":
                   dispatch(setSunday(response.data))
@@ -109,14 +116,19 @@ const EditPlan = props => {
                 default:
                   break;
               }
-            setAdded(true)
         })
         .catch(err=>console.log(err))
+    }
       }
 
     const editExercise=()=>{
+        if (exerciseState.sets === 0 || exerciseState.reps===0) {
+            setError(true)
+            throw new Error("Sets and reps has to include 1 or more of each");
+        } else{
         userService.editExercise({day:exerciseState.day, ...exerciseState.exercise, sets:exerciseState.sets, reps:exerciseState.reps}, user.id)
         .then(response=>{
+            setError(false)
             switch (exerciseState.day) {
                 case "Sunday":
                   dispatch(setSunday(response.data))
@@ -152,6 +164,7 @@ const EditPlan = props => {
               setEdited(true)
         })
         .catch(err=>console.log(err))
+    }
     }
     return (
         <Box sx={{width:"100vw"}}>
@@ -199,8 +212,8 @@ const EditPlan = props => {
 
           </Box>
 
-          <PopUp added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
-          <EditPopUp edited={edited} confirmation="Successfully edited" action={editExercise} method="Edit" open={editOpen} handleClose={handleEditClose}/>
+          <PopUp error={error} added={added} confirmation="Added to plan" action={addExercise} method="Add" open={open} handleClose={handleClose}/>
+          <EditPopUp error={error} edited={edited} confirmation="Successfully edited" action={editExercise} method="Edit" open={editOpen} handleClose={handleEditClose}/>
         </Box>
     )
 }
