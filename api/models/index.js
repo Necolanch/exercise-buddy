@@ -11,7 +11,7 @@ const db = {};
 require("dotenv").config();
 
 let sequelize;
-if (env='development') {
+if (env==='development') {
   sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
     host:process.env.DATABASE_URL,
     dialect:"mssql",
@@ -22,7 +22,7 @@ if (env='development') {
     }
   });
   console.log('Dev Connection has been established successfully.');
-} else if(env='production') {
+} else if(env==='production') {
   sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
     host:process.env.DATABASE_URL,
     dialect:"mssql",
