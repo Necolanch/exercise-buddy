@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: eb-server:0.11
+    container_name: eb-server
+    command: /usr/src/app/node_modules/.bin/nodemon server.js
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+    port:
+      - "3030:3030"
+    env_file: ./api/.env
+    environment:
+      - NODE_ENV=production
+    networks:
+      - myapp-network
+  client:
+    build:
+      context: ./exercise-buddy
+      dockerfile: Dockerfile
+    image: eb-client:0.11
+    container_name: eb-client
+    command: npm start
+    volumes:
+      - ./exercise-buddy:/usr/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - myapp-network
+
+networks:
+  myapp-network:
+    driver: bridge
+
+volumes:
+  node_modules:
+  web-root:
+    driver: local

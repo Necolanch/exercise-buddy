@@ -5,25 +5,34 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 require("dotenv").config();
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
+if (env='development') {
   sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
-    host:"aws.connect.psdb.cloud",
-    dialect:"mysql",
+    host:process.env.DATABASE_URL,
+    dialect:"mssql",
     dialectOptions:{
       ssl:{
         rejectUnauthorized:true
       }
     }
   });
-  console.log('Connection has been established successfully.');
+  console.log('Dev Connection has been established successfully.');
+} else if(env='production') {
+  sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
+    host:process.env.DATABASE_URL,
+    dialect:"mssql",
+    dialectOptions:{
+      ssl:{
+        rejectUnauthorized:true
+      }
+    }
+  });
+  console.log('Prod Connection has been established successfully.');
 }
 
 fs
