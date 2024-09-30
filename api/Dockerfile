@@ -4,11 +4,11 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-ENV NODE_ENV = production
-
 COPY . /usr/src/app
 
 COPY package*.json ./
+
+RUN rm -rf node_modules
 
 RUN npm install
 

@@ -5,25 +5,36 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
 require("dotenv").config();
+const config=require("../config/config.json");
+const env = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
+const db = {};
 
 let sequelize;
-if (config.use_env_variable !== undefined) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
-    host:"aws.connect.psdb.cloud",
-    dialect:"mysql",
+if (env === "development") {
+  sequelize = new Sequelize(process.env.DEV_DATABASE_NAME, process.env.DEV_DATABASE_USERNAME, process.env.DEV_DATABASE_PASSWORD,{
+    host:config.development.host,
+    dialect:"mssql",
     dialectOptions:{
       ssl:{
         rejectUnauthorized:true
       }
     }
   });
-  console.log('Connection has been established successfully.');
+  console.log('Dev connection has been established successfully.');
+} else if (env === "production") {
+  sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
+    host:config.production.host,
+    dialect:"mssql",
+    dialectOptions:{
+      ssl:{
+        rejectUnauthorized:true
+      }
+    }
+  });
+  console.log('Prod connection has been established successfully.');
+} else {
+    throw new Error("Cannot connect to database")
 }
 
 fs
