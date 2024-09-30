@@ -54,8 +54,8 @@ try {
 } else {
   const sequelize = new Sequelize(process.env.DEV_DATABASE_NAME, process.env.DEV_DATABASE_USERNAME, process.env.DEV_DATABASE_PASSWORD, {host:config.development.host, dialect:config.development.dialect});
 try {
+  sequelize.authenticate();
   console.log("HERE")
-    sequelize.authenticate();
   } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
