@@ -1,36 +1,21 @@
 {
   "development": {
-<<<<<<< HEAD
-    "username": "necolanch",
-    "password": "ebAdmin19!",
-=======
     "username": "root",
     "password": "root",
->>>>>>> a812c0eae38d89816ba2f0216f57e0724892b938
     "database": "eb-db",
     "host": "eb-server.database.windows.net",
     "dialect": "mssql"
   },
   "test": {
-<<<<<<< HEAD
-    "username": "necolanch",
-    "password": "ebAdmin19!",
-=======
     "username": "root",
     "password": "root",
->>>>>>> a812c0eae38d89816ba2f0216f57e0724892b938
     "database": "eb-db",
     "host": "eb-server.database.windows.net",
     "dialect": "mssql"
   },
   "production": {
-<<<<<<< HEAD
-    "username": "necolanch",
-    "password": "ebAdmin19!",
-=======
     "username": "root",
     "password": "root",
->>>>>>> a812c0eae38d89816ba2f0216f57e0724892b938
     "database": "eb-db",
     "host": "eb-server.database.windows.net",
     "dialect": "mssql"
