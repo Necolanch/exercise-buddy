@@ -19,6 +19,10 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.2.4",
+<<<<<<< HEAD
+=======
+    "sequelize": "^6.31.1",
+>>>>>>> a812c0eae38d89816ba2f0216f57e0724892b938
     "tedious": "^18.6.1"
   },
   "devDependencies": {

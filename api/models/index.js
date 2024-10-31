@@ -5,15 +5,15 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
 require("dotenv").config();
+const config=require("../config/config.json");
+const env = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : "development";
+const db = {};
 
 let sequelize;
-if (env==='development') {
-  sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
-    host:process.env.DATABASE_URL,
+if (env === "development") {
+  sequelize = new Sequelize(process.env.DEV_DATABASE_NAME, process.env.DEV_DATABASE_USERNAME, process.env.DEV_DATABASE_PASSWORD,{
+    host:config.development.host,
     dialect:"mssql",
     dialectOptions:{
       ssl:{
@@ -21,10 +21,10 @@ if (env==='development') {
       }
     }
   });
-  console.log('Dev Connection has been established successfully.');
-} else if(env==='production') {
+  console.log('Dev connection has been established successfully.');
+} else if (env === "production") {
   sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
-    host:process.env.DATABASE_URL,
+    host:config.production.host,
     dialect:"mssql",
     dialectOptions:{
       ssl:{
@@ -32,7 +32,9 @@ if (env==='development') {
       }
     }
   });
-  console.log('Prod Connection has been established successfully.');
+  console.log('Prod connection has been established successfully.');
+} else {
+    throw new Error("Cannot connect to database")
 }
 
 fs

@@ -37,8 +37,8 @@ app.use((req, res, next) => {
 
 if (process.env.NODE_ENV === "production") {
   const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD,{
-    host:"aws.connect.psdb.cloud",
-    dialect:"mysql",
+    host:config.production.host,
+    dialect:"mssql",
     dialectOptions:{
       ssl:{
         rejectUnauthorized:true
@@ -52,7 +52,7 @@ try {
     console.error('Unable to connect to the database:', error);
 }
 } else {
-  const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {host:config.development.host, dialect:config.development.dialect});
+  const sequelize = new Sequelize(process.env.DEV_DATABASE_NAME, process.env.DEV_DATABASE_USERNAME, process.env.DEV_DATABASE_PASSWORD, {host:config.development.host, dialect:config.development.dialect});
 try {
   sequelize.authenticate();
   console.log("HERE")
