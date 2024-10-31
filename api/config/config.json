@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "exercise_buddy",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "necolanch",
+    "password": "ebAdmin19!",
+    "database": "eb-db",
+    "host": "eb-server.database.windows.net",
+    "dialect": "mssql"
   },
   "test": {
-    "username": "root",
-    "password": "root",
-    "database": "exercise_buddy",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "necolanch",
+    "password": "ebAdmin19!",
+    "database": "eb-db",
+    "host": "eb-server.database.windows.net",
+    "dialect": "mssql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "exercise_buddy",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "necolanch",
+    "password": "ebAdmin19!",
+    "database": "eb-db",
+    "host": "eb-server.database.windows.net",
+    "dialect": "mssql"
   }
 }
