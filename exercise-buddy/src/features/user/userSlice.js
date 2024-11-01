@@ -24,25 +24,25 @@ export const userSlice=createSlice({
             state.id=action.payload
         },
         setSunday:(state,action)=>{
-            state.Sunday=action.payload
+            state.Sunday=JSON.parse(action.payload)
         },
         setMonday:(state,action)=>{
-            state.Monday=action.payload
+            state.Monday=JSON.parse(action.payload)
         },
         setTuesday:(state,action)=>{
-            state.Tuesday=action.payload
+            state.Tuesday=JSON.parse(action.payload)
         },
         setWednesday:(state,action)=>{
-            state.Wednesday=action.payload
+            state.Wednesday=JSON.parse(action.payload)
         },
         setThursday:(state,action)=>{
-            state.Thursday=action.payload
+            state.Thursday=JSON.parse(action.payload)
         },
         setFriday:(state,action)=>{
-            state.Friday=action.payload
+            state.Friday=JSON.parse(action.payload)
         },
         setSaturday:(state,action)=>{
-            state.Saturday=action.payload
+            state.Saturday=JSON.parse(action.payload)
         },
         setFavorites:(state,action)=>{
             state.favorites=action.payload
