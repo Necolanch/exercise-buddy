@@ -30,7 +30,7 @@ const create=async(req,res)=>{
                 secret
             );
     
-            res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-frontend.vercel.app"}).json({user:{
+            res.cookie("token", token, secret, {httpOnly:true, secure: true, sameSite:"none", domain:"exercise-buddy-frontend.vercel.app"}).json({user:{
                 id:response.dataValues.id,
                 username:response.dataValues.username,
                 favorites: response.dataValues.favorites,
@@ -64,8 +64,23 @@ const login = async(req,res)=>{
            res.status(400).json({message:"Please input a password"});
        } else if (!correctPassword) {
            res.status(400).json({message:"Incorrect password"});
-       } else {const token=jwt.sign({id:user.dataValues.id}, secret)
-       res.cookie("token", token, secret, {httpOnly:true, secure: process.env.NODE_ENV==="production", domain:"exercise-buddy-frontend.vercel.app"}).json({message:"Logged in",user:{
+       } else {
+       const token=jwt.sign({id:user.dataValues.id}, secret)
+       if (process.env.NODE_ENV == 'production') {
+           res.setHeader('Set-Cookie', `token=${token}; Path=/; SameSite=None; Secure; HttpOnly`).json({message:"Logged in",user:{
+            id:user.dataValues.id,
+            username:user.dataValues.username,
+            favorites: user.dataValues.favorites,
+            Sunday:user.dataValues.Sunday,
+        Monday:user.dataValues.Monday,
+        Tuesday:user.dataValues.Tuesday,
+        Wednesday:user.dataValues.Wednesday,
+        Thursday:user.dataValues.Thursday,
+        Friday:user.dataValues.Friday,
+        Saturday:user.dataValues.Saturday
+        }});
+       } else {
+        res.cookie("token", token, secret, {httpOnly:true, secure: true, sameSite:"None", domain:"exercise-buddy-frontend.vercel.app"}).json({message:"Logged in",user:{
            id:user.dataValues.id,
            username:user.dataValues.username,
            favorites: user.dataValues.favorites,
@@ -77,6 +92,7 @@ const login = async(req,res)=>{
        Friday:user.dataValues.Friday,
        Saturday:user.dataValues.Saturday
        }})
+    }
    }
     }
 }

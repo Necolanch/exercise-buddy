@@ -1,6 +1,5 @@
 import axios from "axios";
-//https://eb-server.salmoncoast-a42cb58f.eastus.azurecontainerapps.io/
-const API_BASE=process.env.NODE_ENV==="production" ? process.env.REACT_APP_BASE_URL : "https://eb-server.salmoncoast-a42cb58f.eastus.azurecontainerapps.io" 
+const API_BASE=process.env.NODE_ENV==="production" ? process.env.REACT_APP_BASE_URL : "http://localhost:3030" 
 
 const signup=(username, password, confirm)=>{
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&{}'"()^#|:;.,<>/?`~_-])[A-Za-z\d@$!%*?&{}'"()^#|:;.,<>/?`~_-}]{8,}$/;
