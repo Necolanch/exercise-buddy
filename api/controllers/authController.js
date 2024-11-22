@@ -21,27 +21,34 @@ const create=async(req,res)=>{
             Saturday:[],
         })
         .then(response=>{
-            const token=jwt.sign(
-                {
-                    id:response.dataValues.id,
-                    username:response.dataValues.username,
-                    password:response.dataValues.password
-                },
-                secret
-            );
-    
-            res.cookie("token", token, secret, {httpOnly:true, secure: true, sameSite:"none", domain:"exercise-buddy-frontend.vercel.app"}).json({user:{
-                id:response.dataValues.id,
-                username:response.dataValues.username,
-                favorites: response.dataValues.favorites,
-                Sunday:response.dataValues.Sunday,
-            Monday:response.dataValues.Monday,
-            Tuesday:response.dataValues.Tuesday,
-            Wednesday:response.dataValues.Wednesday,
-            Thursday:response.dataValues.Thursday,
-            Friday:response.dataValues.Friday,
-            Saturday:response.dataValues.Saturday
-        }})
+            const token=jwt.sign({id:user.dataValues.id}, secret)
+       if (process.env.NODE_ENV == 'production') {
+           res.setHeader('Set-Cookie', `token=${token}; Path=/; SameSite=None; Secure; HttpOnly`).json({message:"Logged in",user:{
+            id:user.dataValues.id,
+            username:user.dataValues.username,
+            favorites: user.dataValues.favorites,
+            Sunday:user.dataValues.Sunday,
+        Monday:user.dataValues.Monday,
+        Tuesday:user.dataValues.Tuesday,
+        Wednesday:user.dataValues.Wednesday,
+        Thursday:user.dataValues.Thursday,
+        Friday:user.dataValues.Friday,
+        Saturday:user.dataValues.Saturday
+        }});
+       } else {
+        res.cookie("token", token, secret, {httpOnly:true, secure: true, sameSite:"None", domain:"exercise-buddy-frontend.vercel.app"}).json({message:"Logged in",user:{
+           id:user.dataValues.id,
+           username:user.dataValues.username,
+           favorites: user.dataValues.favorites,
+           Sunday:user.dataValues.Sunday,
+       Monday:user.dataValues.Monday,
+       Tuesday:user.dataValues.Tuesday,
+       Wednesday:user.dataValues.Wednesday,
+       Thursday:user.dataValues.Thursday,
+       Friday:user.dataValues.Friday,
+       Saturday:user.dataValues.Saturday
+       }})
+    }
         })
         .catch((err)=>{
             res.status(500)
