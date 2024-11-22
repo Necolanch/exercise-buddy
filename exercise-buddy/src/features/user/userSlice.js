@@ -45,7 +45,7 @@ export const userSlice=createSlice({
             state.Saturday=JSON.parse(action.payload)
         },
         setFavorites:(state,action)=>{
-            state.favorites=action.payload
+            state.favorites=JSON.parse(action.payload)
         }
     }
 })

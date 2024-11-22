@@ -16,7 +16,7 @@ const ViewExercise = props => {
     }else{
     authService.getUser(user.id)
     .then(data=>{
-        if (data.response.status===401) {
+        if (data.status===401) {
             navigate("/")
         }
     })

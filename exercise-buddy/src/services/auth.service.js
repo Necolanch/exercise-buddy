@@ -32,7 +32,7 @@ const logout=()=>{
 
 const getUser=(id)=>{
     return axios.get(`${API_BASE}/user/${id}`, {withCredentials:true})
-            .then(response=>response.data)
+            .then(response=>response)
             .catch(err=>err)
 }
 
